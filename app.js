@@ -12,31 +12,31 @@ var db = require('./db-connector');
 
 // Routes
 router.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname + '/pages/index.html')); // __dirname = current directory
+    res.sendFile(path.join(__dirname + '/pages/index/index.html')); // __dirname = current directory
   });
    
   router.get('/books', (req,res) => {
-    res.sendFile(path.join(__dirname + '/pages/books.html'));
+    res.sendFile(path.join(__dirname + '/pages/books/books.html'));
   });
    
   router.get('/authors', (req,res) => {
-    res.sendFile(path.join(__dirname + '/pages/authors.html'));
+    res.sendFile(path.join(__dirname + '/pages/authors/authors.html'));
   });
 
   router.get('/customers', (req,res) => {
-    res.sendFile(path.join(__dirname + '/pages/customers.html'));
+    res.sendFile(path.join(__dirname + '/pages/customers/customers.html'));
   });
 
   router.get('/orders', (req,res) => {
-    res.sendFile(path.join(__dirname + '/pages/orders.html'));
+    res.sendFile(path.join(__dirname + '/pages/orders/orders.html'));
   });
 
   router.get('/books_authors', (req,res) => {
-    res.sendFile(path.join(__dirname + '/pages/books_authors.html'));
+    res.sendFile(path.join(__dirname + '/pages/books_authors/books_authors.html'));
   });
 
   router.get('/books_orders', (req,res) => {
-    res.sendFile(path.join(__dirname + '/pages/books_orders.html'));
+    res.sendFile(path.join(__dirname + '/pages/books_orders/books_orders.html'));
   });
 
   router.get('/styles.css', (req,res) => {
