@@ -210,3 +210,8 @@ input.error {
   font-size: medium !important;
   border: 1px solid red;
 }
+
+.toolBarLinks {
+  margin-left: auto;
+  margin-right: 0;
+}

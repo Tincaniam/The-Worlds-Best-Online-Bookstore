@@ -14,6 +14,12 @@ import BooksPage from './pages/BooksPage';
 import CustomersPage from './pages/CustomersPage';
 import BooksAuthorsPage from './pages/BooksAuthorsPage';
 import BooksOrdersPage from './pages/BooksOrdersPage';
+import EditAuthorsPage from './pages/EditAuthorsPage';
+import EditOrdersPage from './pages/EditOrdersPage';
+import EditBooksPage from './pages/EditBooksPage';
+import EditCustomersPage from './pages/EditCustomersPage';
+import EditBooksAuthorsPage from './pages/EditBooksAuthorsPage';
+import EditBooksOrdersPage from './pages/EditBooksOrdersPage';
 import { Link } from 'react-router-dom';
 
 function App() {
@@ -32,9 +38,6 @@ function App() {
             type="button"
             edge="start"
             data-tip data-for="homeTip"
-            style={{
-              marginRight: 20,
-            }}
             aria-label="HomePage">
             <HomeRounded />
           </IconButton>
@@ -47,15 +50,13 @@ function App() {
             variant="h5">
           World's Best Online Bookstore
           </Typography>
-
+          
+          <div className = "toolBarLinks">
           <Link to="/books">
             <button
               type="button"
-              edge="end"
+              className="button-medium"
               data-tip data-for="booksTip"
-              style={{
-                marginLeft: 20,
-              }}
               aria-label="books">
             Books
             </button>
@@ -67,11 +68,8 @@ function App() {
           <Link to="/authors">
             <button
               type="button"
-              edge="end"
+              className="button-medium"
               data-tip data-for="authorsTip"
-              style={{
-                marginLeft: 20,
-              }}
               aria-label="books">
             Authors
             </button>
@@ -83,11 +81,8 @@ function App() {
           <Link to="/customers">
             <button
               type="button"
-              edge="end"
+              className="button-medium"
               data-tip data-for="customersTip"
-              style={{
-                marginLeft: 20,
-              }}
               aria-label="customers"
             >
             Customers
@@ -100,11 +95,8 @@ function App() {
           <Link to="/orders">
             <button
               type="button"
-              edge="end"
+              className="button-medium"
               data-tip data-for="ordersTip"
-              style={{
-                marginLeft: 20,
-              }}
               aria-label="orders"
             >
             Orders
@@ -117,11 +109,8 @@ function App() {
           <Link to="/books_authors">
             <button
               type="button"
-              edge="end"
+              className="button-medium"
               data-tip data-for="books_authorsTip"
-              style={{
-                marginLeft: 20,
-              }}
               aria-label="books_authors"
             >
             Books_Authors
@@ -134,11 +123,8 @@ function App() {
           <Link to="/books_orders">
             <button
               type="button"
-              edge="end"
+              className="button-medium"
               data-tip data-for="books_ordersTip"
-              style={{
-                marginLeft: 20,
-              }}
               aria-label="books_orders"
             >
             Books_Orders
@@ -147,7 +133,7 @@ function App() {
           <ReactTooltip delayShow={1000} id="books_ordersTip" place="top" effect="solid">
             Go to the Books_Orders page.
           </ReactTooltip>
-
+        </div>
         </Toolbar>
       </AppBar>
 
@@ -173,6 +159,24 @@ function App() {
           </Route>
           <Route path="/books_orders">
             <BooksOrdersPage/>
+          </Route>
+          <Route path="/edit-books">
+            <EditBooksPage />
+          </Route>
+          <Route path="/edit-authors">
+            <EditAuthorsPage />
+          </Route>
+          <Route path="/edit-customers">
+            <EditCustomersPage />
+          </Route>
+          <Route path="/edit-orders">
+            <EditOrdersPage />
+          </Route>
+          <Route path="/edit-books_authors">
+            <EditBooksAuthorsPage/>
+          </Route>
+          <Route path="/editbooks_orders">
+            <EditBooksOrdersPage/>
           </Route>
           </div>
           <br></br>
