@@ -8,10 +8,12 @@ export const AuthorsPage = () => {
             <br />
             <h5>Add Author</h5>
             <input
+                className='form-control'
                 type="text"
                 placeholder="first_name"
                 />
             <input
+                className='form-control'
                 type="text"
                 placeholder="last_name"
                 />

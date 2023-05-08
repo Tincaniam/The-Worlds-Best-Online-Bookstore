@@ -30,6 +30,12 @@ h3 {
   padding: 1px;
 }
 
+table {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90%;
+}
+
 td, th {
   border-bottom: thin solid #ddd;
   padding: 8px;
@@ -56,8 +62,8 @@ fieldset {
   padding: 0%;
 }
 
-.projectField {
-  font-size: medium !important;
+.form-control {
+  font-size: large !important;
 }
 
 .advLabel {

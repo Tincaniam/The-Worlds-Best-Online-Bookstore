@@ -8,10 +8,12 @@ export const BooksOrdersPage = () => {
             <br />
             <h5>Add Books_Orders relationship</h5>
             <input
+                className='form-control'
                 type="number"
                 placeholder="book_id"
                 />
             <input
+                className='form-control'
                 type="number"
                 placeholder="order_id"
                 />

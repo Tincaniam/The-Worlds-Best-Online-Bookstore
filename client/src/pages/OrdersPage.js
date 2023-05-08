@@ -8,18 +8,22 @@ export const OrdersPage = () => {
             <br />
             <h5>Add order</h5>
             <input
+                className='form-control'
                 type="text"
                 placeholder="order_id"
                 />
             <input
+                className='form-control'
                 type="text"
                 placeholder="customer_id"
                 />
             <input
+                className='form-control'
                 type="text"
                 placeholder="order_date"
                 />
             <input
+                className='form-control'
                 type="decimal"
                 placeholder="order_total"
                 />

@@ -8,10 +8,12 @@ export const BooksAuthorsPage = () => {
             <br />
             <h5>Add Books_Authors relationship</h5>
             <input
+                className='form-control'
                 type="number"
                 placeholder="book_id"
                 />
             <input
+                className='form-control'
                 type="number"
                 placeholder="author_id"
                 />

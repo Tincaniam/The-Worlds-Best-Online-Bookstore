@@ -8,18 +8,22 @@ export const CustomersPage = () => {
             <br />
             <h5>Add Customer</h5>
             <input
+                className='form-control'
                 type="text"
                 placeholder="first_name"
                 />
             <input
+                className='form-control'
                 type="text"
                 placeholder="last_name"
                 />
             <input
+                className='form-control'
                 type="text"
                 placeholder="address"
                 />
             <input
+                className='form-control'
                 type="text"
                 placeholder="email_address"
                 />

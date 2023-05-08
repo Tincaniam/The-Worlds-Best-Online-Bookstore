@@ -8,10 +8,12 @@ export const BooksPage = () => {
             <br />
             <h5>Add Book</h5>
             <input
+                className='form-control'
                 type="text"
                 placeholder="title"
                 />
             <input
+                className='form-control'
                 type="text"
                 placeholder="publication_date"
                 />

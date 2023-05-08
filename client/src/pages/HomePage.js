@@ -7,7 +7,7 @@ function HomePage() {
     return (
         <div>
             <h3>Home</h3>
-            <p>Select the table names to manage below or in the toolbar to navigate to each table's page</p>
+            <p style={{fontSize : "14pt"}}>Select the table to manage below or in the toolbar to navigate to each table's page</p>
         <div className = "toolBarLinks">
             <Link to="/books">
                 <button
