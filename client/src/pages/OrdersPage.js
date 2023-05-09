@@ -20,6 +20,7 @@ export const OrdersPage = () => {
     return (
         <div>
             <h3>Orders</h3>
+            <br />
             <h5>Add order</h5>
             <input
                 className='form-control'
