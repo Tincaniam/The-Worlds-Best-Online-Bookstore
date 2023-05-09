@@ -95,7 +95,7 @@ function App() {
             Customers
             </button>
           </Link>
-          <ReactTooltip delayShow={1000} id="authorsTip" place="top" effect="solid">
+          <ReactTooltip delayShow={1000} id="customersTip" place="bottom" effect="solid">
             Go to the Customers page.
           </ReactTooltip>
 
@@ -109,7 +109,7 @@ function App() {
             Orders
             </button>
           </Link>
-          <ReactTooltip delayShow={1000} id="authorsTip" place="top" effect="solid">
+          <ReactTooltip delayShow={1000} id="ordersTip" place="bottom" effect="solid">
             Go to the Orders page.
           </ReactTooltip>
 
@@ -123,7 +123,7 @@ function App() {
             Books_Authors
             </button>
           </Link>
-          <ReactTooltip delayShow={1000} id="books_authorsTip" place="top" effect="solid">
+          <ReactTooltip delayShow={1000} id="books_authorsTip" place="bottom" effect="solid">
             Go to the Books_Authors page.
           </ReactTooltip>
 
@@ -137,7 +137,7 @@ function App() {
             Books_Orders
             </button>
           </Link>
-          <ReactTooltip delayShow={1000} id="books_ordersTip" place="top" effect="solid">
+          <ReactTooltip delayShow={1000} id="books_ordersTip" place="bottom" effect="solid">
             Go to the Books_Orders page.
           </ReactTooltip>
         </div>
