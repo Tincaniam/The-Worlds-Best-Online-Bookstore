@@ -2,21 +2,36 @@ import React from 'react';
 
 export const BooksAuthorsPage = () => {
 
+    // temp books hardcoded for testing
+    const books = [
+        { book_id: 1, title: 'War and Peace' },
+        { book_id: 2, title: 'Good Omens' },
+        { book_id: 3, title: 'To Kill a Mockingbird' }
+    ];
+
+    // temp authors hardcoded for testing
+    const authors = [
+        { author_id: 1, first_name: 'Leo', last_name: 'Tolstoy' },
+        { author_id: 2, first_name: 'Terry', last_name: 'Pratchett' },
+        { author_id: 3, first_name: 'Neil', last_name: 'Gaiman' },
+        { author_id: 4, first_name: 'Harper', last_name: 'Lee'}
+    ];
+
     return (
         <div>
             <h3>Book_Authors</h3>
             <br />
             <h5>Add Books_Authors relationship</h5>
-            <input
-                className='form-control'
-                type="number"
-                placeholder="book_id"
-                />
-            <input
-                className='form-control'
-                type="number"
-                placeholder="author_id"
-                />
+            <select className='form-control'>
+                {books.map(book => (
+                    <option key={book.book_id} value={book.book_id}>{book.title}</option>
+                ))}
+            </select>
+            <select className='form-control'>
+                {authors.map(author => (
+                    <option key={author.author_id} value={author.author_id}>{author.first_name} {author.last_name}</option>
+                ))}
+            </select>
             <button className="button-medium">Add Books_Authors relationship</button>
 
             <br /><br />

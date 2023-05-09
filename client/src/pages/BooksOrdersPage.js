@@ -2,21 +2,37 @@ import React from 'react';
 
 export const BooksOrdersPage = () => {
 
+    // temp books hardcoded for testing
+    const books = [
+        { book_id: 1, title: 'War and Peace' },
+        { book_id: 2, title: 'Good Omens' },
+        { book_id: 3, title: 'To Kill a Mockingbird' }
+    ];
+
+    // temp orders hardcoded for testing
+    const orders = [
+        { order_id: 1, order_date: '2020-01-01' },
+        { order_id: 2, order_date: '2020-02-02' },
+        { order_id: 3, order_date: '2020-03-03' }
+    ];
+
     return (
         <div>
             <h3>Books_Orders</h3>
             <br />
             <h5>Add Books_Orders relationship</h5>
-            <input
-                className='form-control'
-                type="number"
-                placeholder="book_id"
-                />
-            <input
-                className='form-control'
-                type="number"
-                placeholder="order_id"
-                />
+            <select className='form-control'>
+                {books.map(book => (
+                    <option key={book.book_id} value={book.book_id}>{book.title}</option>
+                ))}
+            </select>
+            <select className='form-control'>
+                {orders.map(order => (
+                    <option key={order.order_id} value={order.order_id}>{order.order_id}</option>
+                ))}
+
+            </select>
+
             <button className="button-medium">Add Books_Orders relationship</button>
 
             <br /><br />

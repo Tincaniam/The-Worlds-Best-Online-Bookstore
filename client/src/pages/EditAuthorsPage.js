@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const AuthorsPage = () => {
+export const EditAuthorsPage = () => {
 
     return (
         <div>
@@ -72,4 +72,4 @@ export const AuthorsPage = () => {
     );
 }
 
-export default AuthorsPage;
+export default EditAuthorsPage;
