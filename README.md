@@ -12,7 +12,7 @@ To install and run the server, clone the repository. In the "server" directory, 
 
 Then run:
 
-`node server.js`
+`npm start`
 
 Client
 
