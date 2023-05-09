@@ -19,7 +19,7 @@ class Book {
 
         });
     }
-    static findById(bookId, result) {
+    static getById(bookId, result) {
         db.query(`SELECT * FROM Books WHERE book_id = ${bookId}`, (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -50,7 +50,7 @@ class Book {
             };
         });
     }
-    static update(id, book, result) {
+    static updateByID(id, book, result) {
         db.query("UPDATE Books SET title = ?, publication_date = ? WHERE book_id = ?", [book.title, book.publication_date, id], (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -68,7 +68,7 @@ class Book {
             };
         });
     }
-    static delete(id, result) {
+    static deleteByID(id, result) {
         db.query("DELETE FROM Books WHERE book_id = ?", id, (err, res) => {
             if (err) {
                 console.log("error: ", err);

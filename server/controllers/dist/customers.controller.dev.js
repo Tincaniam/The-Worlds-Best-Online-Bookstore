@@ -1,12 +1,12 @@
 "use strict";
 
-var Author = require("../models/authors.model.js");
+var Customer = require("../models/customers.model.js");
 
 getAll = function getAll(req, res) {
-  Author.getAll(function (err, data) {
+  Customer.getAll(function (err, data) {
     if (err) {
       res.status(500).send({
-        message: err.message || "Error occurred while retrieving authors."
+        message: err.message || "Error occurred while retrieving customers."
       });
     } else {
       res.send(data);
@@ -17,15 +17,15 @@ getAll = function getAll(req, res) {
 };
 
 getByID = function getByID(req, res) {
-  Author.getByID(req.params.authorID, function (err, data) {
+  Customer.getByID(req.params.customerID, function (err, data) {
     if (err) {
       if (err.kind == "not_found") {
         res.status(404).send({
-          message: "Author with id " + req.params.authorID + " not found."
+          message: "Customer with id " + req.params.customerID + " not found."
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving author with id " + req.params.authorID
+          message: "Error retrieving customer with id " + req.params.customerID
         });
       }
 
@@ -48,13 +48,15 @@ create = function create(req, res) {
   }
 
   ;
-  var newAuthor = new Author({
+  var newCustomer = new Customer({
     first_name: req.body.first_name,
-    last_name: req.body.last_name
+    last_name: req.body.last_name,
+    email: req.body.email,
+    phone: req.body.phone
   });
-  console.log("newAuthor: ");
-  console.log(newAuthor);
-  Author.create(newAuthor, function (err, data) {
+  console.log("newCustomer: ");
+  console.log(newCustomer);
+  Customer.create(newCustomer, function (err, data) {
     if (err) {
       res.status(500).send({
         message: err.message || "Error: 500 Internal Server Error."
@@ -75,15 +77,15 @@ updateByID = function updateByID(req, res) {
   }
 
   ;
-  Author.updateBYID(req.params.authorID, new Author(req.body), function (err, data) {
+  Customer.updateBYID(req.params.customerID, new Customer(req.body), function (err, data) {
     if (err) {
       if (err.kind == "not_found") {
         res.status(404).send({
-          message: "Author with id " + req.params.authorID + " not found."
+          message: "Customer with id " + req.params.customerID + " not found."
         });
       } else {
         res.status(500).send({
-          message: "Error updating author with id " + req.params.authorID
+          message: "Error updating customer with id " + req.params.customerID
         });
       }
 
@@ -97,22 +99,22 @@ updateByID = function updateByID(req, res) {
 };
 
 deleteByID = function deleteByID(req, res) {
-  Author.deleteByID(req.params.authorID, function (err, data) {
+  Customer.deleteByID(req.params.customerID, function (err, data) {
     if (err) {
       if (err.kind == "not_found") {
         res.status(404).send({
-          message: "Author with id " + req.params.authorID + " not found."
+          message: "Customer with id " + req.params.customerID + " not found."
         });
       } else {
         res.status(500).send({
-          message: "Error deleting author with id " + req.params.authorID
+          message: "Error deleting customer with id " + req.params.customerID
         });
       }
 
       ;
     } else {
       res.send({
-        message: "Author deleted successfully."
+        message: "Customer was deleted successfully."
       });
     }
 
@@ -124,6 +126,6 @@ module.exports = {
   getAll: getAll,
   getByID: getByID,
   create: create,
-  update: update,
+  updateByID: updateByID,
   deleteByID: deleteByID
 };

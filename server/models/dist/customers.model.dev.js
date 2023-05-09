@@ -14,32 +14,35 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var db = require('../db-connector');
 
-var Book =
+var Customer =
 /*#__PURE__*/
 function () {
-  function Book(book) {
-    _classCallCheck(this, Book);
+  function Customer(customer) {
+    _classCallCheck(this, Customer);
 
-    this.title = book.title;
-    this.publication_date = book.publication_date;
+    this.first_name = customer.first_name;
+    this.last_name = customer.last_name;
+    this.address = customer.address;
+    this.email = customer.email;
+    this.phone = customer.phone;
   }
 
-  _createClass(Book, null, [{
+  _createClass(Customer, null, [{
     key: "create",
-    value: function create(newBook, result) {
-      db.query("INSERT INTO Books SET ?", newBook, function (err, res) {
+    value: function create(newCustomer, result) {
+      db.query("INSERT INTO Customers SET ?", newCustomer, function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null); // err is the error object, null is the result
 
           return;
         } else {
-          console.log("created book: ", _objectSpread({
+          console.log("created customer: ", _objectSpread({
             id: res.insertId
-          }, newBook));
+          }, newCustomer));
           result(null, _objectSpread({
             id: res.insertId
-          }, newBook));
+          }, newCustomer));
         }
 
         ;
@@ -47,18 +50,18 @@ function () {
     }
   }, {
     key: "getById",
-    value: function getById(bookId, result) {
-      db.query("SELECT * FROM Books WHERE book_id = ".concat(bookId), function (err, res) {
+    value: function getById(customerId, result) {
+      db.query("SELECT * FROM Customers WHERE customer_id = ".concat(customerId), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);
           return;
         } else if (res.length) {
-          console.log("found book: ", res[0]);
+          console.log("found customer: ", res[0]);
           result(null, res[0]);
           return;
         } else {
-          // book with the id not found
+          // customer with the customer_id not found
           result({
             kind: "not_found"
           }, null);
@@ -70,13 +73,13 @@ function () {
   }, {
     key: "getAll",
     value: function getAll(result) {
-      db.query("SELECT * FROM Books", function (err, res) {
+      db.query("SELECT * FROM Customers", function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);
           return;
         } else {
-          console.log("Books: ", res);
+          console.log("Customers: ", res);
           result(null, res);
         }
 
@@ -85,46 +88,44 @@ function () {
     }
   }, {
     key: "updateByID",
-    value: function updateByID(id, book, result) {
-      db.query("UPDATE Books SET title = ?, publication_date = ? WHERE book_id = ?", [book.title, book.publication_date, id], function (err, res) {
+    value: function updateByID(id, customer, result) {
+      db.query("UPDATE Customers SET first_name = ?, last_name = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zip_code = ? WHERE customer_id = ?", [customer.first_name, customer.last_name, customer.email, customer.phone, customer.address, customer.city, customer.state, customer.zip_code, id], function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);
           return;
         } else if (res.affectedRows == 0) {
-          // book with the id not found
+          // customer
           result({
             kind: "not_found"
           }, null);
           return;
         } else {
-          console.log("updated book: ", _objectSpread({
+          console.log("updated customer: ", _objectSpread({
             id: id
-          }, book));
+          }, customer));
           result(null, _objectSpread({
             id: id
-          }, book));
+          }, customer));
         }
-
-        ;
       });
     }
   }, {
     key: "deleteByID",
     value: function deleteByID(id, result) {
-      db.query("DELETE FROM Books WHERE book_id = ?", id, function (err, res) {
+      db.query("DELETE FROM Customers WHERE customer_id = ?", id, function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);
           return;
         } else if (res.affectedRows == 0) {
-          // book with the id not found
+          // customer with the customer_id not found
           result({
             kind: "not_found"
           }, null);
           return;
         } else {
-          console.log("deleted Book with book_id: ", id);
+          console.log("deleted customer with customer_id: ", id);
           result(null, res);
         }
 
@@ -133,7 +134,7 @@ function () {
     }
   }]);
 
-  return Book;
+  return Customer;
 }();
 
-module.exports = Book;
+module.exports = Customer;

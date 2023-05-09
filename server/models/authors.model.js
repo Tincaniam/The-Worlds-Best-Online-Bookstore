@@ -5,6 +5,7 @@ class Author {
         this.first_name = author.first_name;
         this.last_name = author.last_name;
     }
+    
     static create(newAuthor, result) {
         db.query("INSERT INTO Authors SET ?", newAuthor, (err, res) => {
             if (err) {
@@ -19,7 +20,8 @@ class Author {
 
         });
     }
-    static findById(authorId, result) {
+
+    static getById(authorId, result) {
         db.query(`SELECT * FROM Authors WHERE author_id = ${authorId}`, (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -37,6 +39,7 @@ class Author {
             };
         });
     }
+
     static getAll(result) {
         db.query("SELECT * FROM Authors", (err, res) => {
             if (err) {
@@ -50,7 +53,8 @@ class Author {
             };
         });
     }
-    static update(id, author, result) {
+
+    static updateByID(id, author, result) {
         db.query("UPDATE Authors SET first_name = ?, last_name = ? WHERE author_id = ?", [author.first_name, author.last_name, id], (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -68,7 +72,8 @@ class Author {
             };
         });
     }
-    static delete(id, result) {
+
+    static deleteByID(id, result) {
         db.query("DELETE FROM Authors WHERE author_id = ?", id, (err, res) => {
             if (err) {
                 console.log("error: ", err);

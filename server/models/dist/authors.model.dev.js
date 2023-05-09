@@ -46,8 +46,8 @@ function () {
       });
     }
   }, {
-    key: "findById",
-    value: function findById(authorId, result) {
+    key: "getById",
+    value: function getById(authorId, result) {
       db.query("SELECT * FROM Authors WHERE author_id = ".concat(authorId), function (err, res) {
         if (err) {
           console.log("error: ", err);
@@ -84,8 +84,8 @@ function () {
       });
     }
   }, {
-    key: "update",
-    value: function update(id, author, result) {
+    key: "updateByID",
+    value: function updateByID(id, author, result) {
       db.query("UPDATE Authors SET first_name = ?, last_name = ? WHERE author_id = ?", [author.first_name, author.last_name, id], function (err, res) {
         if (err) {
           console.log("error: ", err);
@@ -110,8 +110,8 @@ function () {
       });
     }
   }, {
-    key: "delete",
-    value: function _delete(id, result) {
+    key: "deleteByID",
+    value: function deleteByID(id, result) {
       db.query("DELETE FROM Authors WHERE author_id = ?", id, function (err, res) {
         if (err) {
           console.log("error: ", err);

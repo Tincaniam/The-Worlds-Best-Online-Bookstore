@@ -11,6 +11,8 @@ var booksRoutes = require('./routes/books.routes.js');
 
 var authorsRoutes = require('./routes/authors.routes.js');
 
+var customersRoutes = require('./routes/customers.routes.js');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -20,7 +22,8 @@ app.get('/', function (req, res) {
   res.send('Home route!');
 });
 app.use('/api/books', booksRoutes);
-app.use('/api/authors', authorsRoutes); // Listener
+app.use('/api/authors', authorsRoutes);
+app.use('/api/customers', customersRoutes); // Listener
 
 app.listen(PORT, function () {
   // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.

@@ -50,12 +50,12 @@ create = (req, res) => {
     });
 }
 
-update = (req, res) => {
+updateByID = (req, res) => {
     if (!req.body) {
         res.status(400).send({message: "Error: 400 Bad Request."});
     };
 
-    Author.update(req.params.authorID, new Author(req.body), (err, data) => {
+    Author.updateBYID(req.params.authorID, new Author(req.body), (err, data) => {
         if (err) {
             if (err.kind == "not_found") {
                 res.status(404).send({message: "Author with id " + req.params.authorID + " not found."});

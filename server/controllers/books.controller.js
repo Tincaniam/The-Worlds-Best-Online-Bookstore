@@ -51,12 +51,12 @@ create = (req, res) => {
     });
 }
 
-update = (req, res) => {
+updateBYID = (req, res) => {
     if (!req.body) {
         res.status(400).send({message: "Error: 400 Bad Request."});
     };
 
-    Book.update(req.params.bookID, new Book(req.body), (err, data) => {
+    Book.updateBYID(req.params.bookID, new Book(req.body), (err, data) => {
         if (err) {
             if (err.kind == "not_found") {
                 res.status(404).send({message: "Book with id " + req.params.bookID + " not found."});
@@ -72,7 +72,7 @@ update = (req, res) => {
 }
 
 deleteByID = (req, res) => {
-    Book.delete(req.params.bookID, (err, data) => {
+    Book.deleteByID(req.params.bookID, (err, data) => {
         if (err) {
             if (err.kind == "not_found") {
                 res.status(404).send({message: "Book with id " + req.params.bookID + " not found."});

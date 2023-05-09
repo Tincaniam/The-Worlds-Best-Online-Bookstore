@@ -12,7 +12,7 @@ router.get('/:bookID', booksController.getByID);
 router.post('/', booksController.create);
 
 // Update a book with bookID
-router.put('/:bookID', booksController.update);
+router.put('/:bookID', booksController.updateByID);
 
 // Delete a book with bookID
 router.delete('/:bookID', booksController.deleteByID);
