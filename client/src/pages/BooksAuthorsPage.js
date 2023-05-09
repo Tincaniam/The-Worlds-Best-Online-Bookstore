@@ -19,7 +19,7 @@ export const BooksAuthorsPage = () => {
 
     return (
         <div>
-            <h3>Book_Authors</h3>
+            <h3>Books_Authors</h3>
             <br />
             <h5>Add Books_Authors relationship</h5>
             <select className='form-control'>
