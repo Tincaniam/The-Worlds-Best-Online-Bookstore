@@ -10,11 +10,6 @@ export const OrdersPage = () => {
             <input
                 className='form-control'
                 type="text"
-                placeholder="order_id"
-                />
-            <input
-                className='form-control'
-                type="text"
                 placeholder="customer_id"
                 />
             <input
