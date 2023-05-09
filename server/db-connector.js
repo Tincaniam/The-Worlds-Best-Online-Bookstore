@@ -2,7 +2,7 @@
 var mysql = require('mysql')
 
 // Create a 'connection pool' using the provided credentials
-var pool = mysql.createPool({
+var db = mysql.createConnection({
     connectionLimit : 10,
     host            : 'classmysql.engr.oregonstate.edu',
     user            : 'cs340_tinnelm',
@@ -10,5 +10,10 @@ var pool = mysql.createPool({
     database        : 'cs340_tinnelm'
 })
 
+db.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected to MySQL!");
+    });
+
 // Export it for use in our application
-module.exports.pool = pool;
+module.exports = db;

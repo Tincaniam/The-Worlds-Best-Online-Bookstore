@@ -65,6 +65,7 @@ fieldset {
 
 .form-control {
   font-size: large !important;
+  margin-left: auto;
 }
 
 .advLabel {

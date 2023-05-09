@@ -1,28 +1,64 @@
 import React from 'react';
+import { CCard} from '@coreui/react';
 
 export const OrdersPage = () => {
 
     return (
         <div>
             <h3>Orders</h3>
-            <br />
-            <h5>Add order</h5>
-            <input
-                className='form-control'
-                type="text"
-                placeholder="customer_id"
-                />
-            <input
-                className='form-control'
-                type="text"
-                placeholder="order_date"
-                />
-            <input
-                className='form-control'
-                type="decimal"
-                placeholder="order_total"
-                />
-            <button className="button-medium">Add Order</button>
+            <CCard style={{backgroundColor:'#4D4D4D', margin:'3%', padding:'3%'}}>
+                <legend>Add order</legend>
+                <fieldset>
+                    <div className="form-group">
+                        <input
+                            className='form-control'
+                            type="text"
+                            placeholder="customer_id"
+                            />
+                    </div>
+                    <div className="form-group">
+                        <input
+
+                            className='form-control'
+                            type="text"
+                            placeholder="order_date"
+                            />
+                    </div>
+                    <div className="form-group">
+                        <input
+
+                            className='form-control'
+                            type="decimal"
+                            placeholder="order_total"
+                            />
+                    </div>
+
+                </fieldset>
+                {/* <ul>
+                    <li>
+                        <input
+                            className='form-control'
+                            type="text"
+                            placeholder="customer_id"
+                            />
+                    </li>
+                    <li>
+                        <input
+                            className='form-control'
+                            type="text"
+                            placeholder="order_date"
+                            />
+                    </li>
+                    <li>
+                        <input
+                            className='form-control'
+                            type="decimal"
+                            placeholder="order_total"
+                            />
+                    </li>
+                </ul> */}
+                <button className="button-medium">Add Order</button>
+            </CCard>
 
             <br /><br />
             <table className="table table-striped">

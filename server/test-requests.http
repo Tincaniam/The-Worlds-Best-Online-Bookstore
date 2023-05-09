@@ -1,0 +1,23 @@
+### Get All Books
+GET http://localhost:4000/api/books HTTP/1.1
+
+### Create a book
+POST http://localhost:4000/api/books HTTP/1.1
+content-type: application/json
+
+{
+    "title": "The Adventures of Tom Sawyer",
+    "publication_date": "1869-11-01"
+}
+
+### Update Book By ID
+PUT http://localhost:4000/api/books/18 HTTP/1.1
+content-type: application/json
+
+{
+    "title": "The Adventures of Tom Sawyer",
+    "publication_date": "1869-07-01"
+}
+
+### Delete Book By ID
+DELETE http://localhost:4000/api/books/19 HTTP/1.1
