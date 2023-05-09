@@ -1,6 +1,21 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 export const BooksPage = () => {
+
+    let history = useHistory();
+
+    const editBooks1 = () => {
+        history.push('/edit-books1');
+    }
+
+    const editBooks2 = () => {
+        history.push('/edit-books2');
+    }
+
+    const editBooks3 = () => {
+        history.push('/edit-books3');
+    }
 
     return (
         <div>
@@ -35,8 +50,8 @@ export const BooksPage = () => {
                         <td>War and Peace</td>
                         <td>1869-01-01</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <button className="btn btn-outline-primary" onClick={editBooks1}>Edit</button>
+                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -44,8 +59,8 @@ export const BooksPage = () => {
                         <td>Good Omens</td>
                         <td>1990-05-10</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <button className="btn btn-outline-primary" onClick={editBooks2}>Edit</button>
+                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -53,8 +68,8 @@ export const BooksPage = () => {
                         <td>To Kill a Mockingbird</td>
                         <td>1960-07-11</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <button className="btn btn-outline-primary" onClick={editBooks3}>Edit</button>
+                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
                         </td>
                     </tr>
                 </tbody>

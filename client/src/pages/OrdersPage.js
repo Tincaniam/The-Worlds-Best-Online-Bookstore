@@ -1,64 +1,43 @@
 import React from 'react';
-import { CCard} from '@coreui/react';
+import { useHistory } from 'react-router-dom';
 
 export const OrdersPage = () => {
+
+    let history = useHistory();
+
+    const editOrders1 = () => {
+        history.push('/edit-orders1');
+    }
+
+    const editOrders2 = () => {
+        history.push('/edit-orders2');
+    }
+
+    const editOrders3 = () => {
+        history.push('/edit-orders3');
+    }
 
     return (
         <div>
             <h3>Orders</h3>
-            <CCard style={{backgroundColor:'#4D4D4D', margin:'3%', padding:'3%'}}>
-                <legend>Add order</legend>
-                <fieldset>
-                    <div className="form-group">
-                        <input
-                            className='form-control'
-                            type="text"
-                            placeholder="customer_id"
-                            />
-                    </div>
-                    <div className="form-group">
-                        <input
+            <h5>Add order</h5>
+            <input
+                className='form-control'
+                type="text"
+                placeholder="customer_id"
+                />
+            <input
+                className='form-control'
+                type="text"
+                placeholder="order_date"
+                />
+            <input
+                className='form-control'
+                type="decimal"
+                placeholder="order_total"
+                />
 
-                            className='form-control'
-                            type="text"
-                            placeholder="order_date"
-                            />
-                    </div>
-                    <div className="form-group">
-                        <input
-
-                            className='form-control'
-                            type="decimal"
-                            placeholder="order_total"
-                            />
-                    </div>
-
-                </fieldset>
-                {/* <ul>
-                    <li>
-                        <input
-                            className='form-control'
-                            type="text"
-                            placeholder="customer_id"
-                            />
-                    </li>
-                    <li>
-                        <input
-                            className='form-control'
-                            type="text"
-                            placeholder="order_date"
-                            />
-                    </li>
-                    <li>
-                        <input
-                            className='form-control'
-                            type="decimal"
-                            placeholder="order_total"
-                            />
-                    </li>
-                </ul> */}
-                <button className="button-medium">Add Order</button>
-            </CCard>
+            <button className="button-medium">Add Order</button>
 
             <br /><br />
             <table className="table table-striped">
@@ -78,8 +57,8 @@ export const OrdersPage = () => {
                         <td>2023-01-03 07:05:45</td>
                         <td>24.95</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <button className="btn btn-outline-primary" onClick={editOrders1}>Edit</button>
+                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -88,8 +67,8 @@ export const OrdersPage = () => {
                         <td>2022-08-23 23:24:00</td>
                         <td>99.75</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <button className="btn btn-outline-primary" onClick={editOrders2}>Edit</button>
+                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -98,8 +77,8 @@ export const OrdersPage = () => {
                         <td>2023-05-03 12:03:28</td>
                         <td>55.12</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <button className="btn btn-outline-primary" onClick={editOrders3}>Edit</button>
+                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
                         </td>
                     </tr>
                 </tbody>

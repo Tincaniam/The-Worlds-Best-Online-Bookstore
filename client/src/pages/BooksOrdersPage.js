@@ -49,7 +49,6 @@ export const BooksOrdersPage = () => {
                         <td>1</td>
                         <td>1</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
                             <button className="btn btn-outline-danger">Delete</button>
                         </td>
                     </tr>
@@ -57,7 +56,6 @@ export const BooksOrdersPage = () => {
                         <td>2</td>
                         <td>2</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
                             <button className="btn btn-outline-danger">Delete</button>
                         </td>
                     </tr>
@@ -65,7 +63,6 @@ export const BooksOrdersPage = () => {
                         <td>2</td>
                         <td>3</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
                             <button className="btn btn-outline-danger">Delete</button>
                         </td>
                     </tr>
@@ -73,7 +70,6 @@ export const BooksOrdersPage = () => {
                         <td>3</td>
                         <td>2</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
                             <button className="btn btn-outline-danger">Delete</button>
                         </td>
                     </tr>

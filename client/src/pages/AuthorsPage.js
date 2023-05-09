@@ -1,6 +1,25 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 export const AuthorsPage = () => {
+
+    let history = useHistory();
+
+    const editAuthors1 = () => {
+        history.push('/edit-authors1');
+    }
+
+    const editAuthors2 = () => {
+        history.push('/edit-authors2');
+    }
+
+    const editAuthors3 = () => {
+        history.push('/edit-authors3');
+    }
+
+    const editAuthors4 = () => {
+        history.push('/edit-authors4');
+    }
 
     return (
         <div>
@@ -35,8 +54,8 @@ export const AuthorsPage = () => {
                         <td>Leo</td>
                         <td>Tolstoy</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <button className="btn btn-outline-primary" onClick={editAuthors1}>Edit</button>
+                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -44,8 +63,8 @@ export const AuthorsPage = () => {
                         <td>Terry</td>
                         <td>Pratchett</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <button className="btn btn-outline-primary" onClick={editAuthors2}>Edit</button>
+                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -53,8 +72,8 @@ export const AuthorsPage = () => {
                         <td>Neil</td>
                         <td>Gaiman</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <button className="btn btn-outline-primary" onClick={editAuthors3}>Edit</button>
+                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -62,8 +81,8 @@ export const AuthorsPage = () => {
                         <td>Harper</td>
                         <td>Lee</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <button className="btn btn-outline-primary" onClick={editAuthors4}>Edit</button>
+                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
                         </td>
                     </tr>
                 </tbody>

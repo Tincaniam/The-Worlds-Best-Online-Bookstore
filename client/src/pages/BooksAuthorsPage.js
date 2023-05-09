@@ -48,7 +48,6 @@ export const BooksAuthorsPage = () => {
                         <td>1</td>
                         <td>1</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
                             <button className="btn btn-outline-danger">Delete</button>
                         </td>
                     </tr>
@@ -56,7 +55,6 @@ export const BooksAuthorsPage = () => {
                         <td>2</td>
                         <td>2</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
                             <button className="btn btn-outline-danger">Delete</button>
                         </td>
                     </tr>
@@ -64,7 +62,6 @@ export const BooksAuthorsPage = () => {
                         <td>2</td>
                         <td>3</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
                             <button className="btn btn-outline-danger">Delete</button>
                         </td>
                     </tr>
@@ -72,7 +69,6 @@ export const BooksAuthorsPage = () => {
                         <td>3</td>
                         <td>4</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
                             <button className="btn btn-outline-danger">Delete</button>
                         </td>
                     </tr>

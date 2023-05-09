@@ -1,6 +1,21 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 export const CustomersPage = () => {
+
+    let history = useHistory();
+
+    const editCustomers1 = () => {
+        history.push('/edit-customers1');
+    }
+
+    const editCustomers2 = () => {
+        history.push('/edit-customers2');
+    }
+
+    const editCustomers3 = () => {
+        history.push('/edit-customers3');
+    }
 
     return (
         <div>
@@ -56,8 +71,8 @@ export const CustomersPage = () => {
                         <td>flupin@email.com</td>
                         <td>5038675309</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <button className="btn btn-outline-primary" onClick={editCustomers1}>Edit</button>
+                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -68,8 +83,8 @@ export const CustomersPage = () => {
                         <td>bbobberson@email.com</td>
                         <td>NULL</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <button className="btn btn-outline-primary" onClick={editCustomers2}>Edit</button>
+                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -80,8 +95,8 @@ export const CustomersPage = () => {
                         <td>hsharp@email.com</td>
                         <td>NULL</td>
                         <td>
-                            <button className="btn btn-outline-primary">Edit</button>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <button className="btn btn-outline-primary" onClick={editCustomers3}>Edit</button>
+                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
                         </td>
                     </tr>
                 </tbody>
