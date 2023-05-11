@@ -11,6 +11,10 @@
 -- Books
 SELECT * FROM Books;
 
+-- Search/Filter books by title
+SELECT * FROM Books
+WHERE title = :titleFromUserInput;
+
 -- Authors
 SELECT * FROM Authors;
 
@@ -38,23 +42,23 @@ VALUES (:title, :publication_date);
 
 -- Authors
 INSERT INTO Authors (first_name, last_name)
-VALUES (:authorFName, :authorLName);
+VALUES (:authorFNameFromDropDown, :authorLNameFromDropDown);
 
 -- Customers
 INSERT INTO Customers (first_name, last_name, address, email, phone_number)
 VALUES (:customerFName, :customerLName, :customerAddress, :customerEmail, :customerPhone);
 
--- Orders
+-- Orders, include FK customer_id from drop down
 INSERT INTO Orders (order_id, customer_id, order_date, order_total)
-VALUES (:orderID, :customerID, :orderDate, :orderTotal);
+VALUES (:orderID, :customerIDFromDropDown, :orderDate, :orderTotal);
+
+-- Also add to Books_Orders when adding to Orders
+INSERT INTO Books_Orders (book_id, order_id)
+VALUES (:bookIDFromDropDown, :orderID);
 
 -- Books_Authors
 INSERT INTO Books_Authors (book_id, author_id)
-VALUES (:bookID, :authorID);
-
--- Books_Orders
-INSERT INTO Books_Orders (book_id, order_id)
-VALUES (:bookID, :orderID);
+VALUES (:bookIDFromDropDown, :authorIDFromDropDown);
 
 -- -----------------------------
 -- UPDATE queries
@@ -67,66 +71,66 @@ VALUES (:bookID, :orderID);
 -- Select query to get the book form data of the book that is being updated
 SELECT *
 FROM Books
-WHERE book_id = :bookID;
+WHERE book_id = :bookIDFromDropDown;
 
 UPDATE Books
 SET title = :title, publication_date = :publication_date
-WHERE book_id = :bookID;
+WHERE book_id = :bookIDFromDropDown;
 
 -- Authors
 
 -- Select query to get the author form data of the author that is being updated
 SELECT *
 FROM Authors
-WHERE author_id = :authorID;
+WHERE author_id = :authorIDFromDropDown;
 
 UPDATE Authors
 SET first_name = :authorFName, last_name = :authorLName
-WHERE author_id = :authorID;
+WHERE author_id = :authorIDFromDropDown;
 
 -- Customers
 
 -- Select query to get the customer form data of the customer that is being updated
 SELECT *
 FROM Customers
-WHERE customer_id = :customerID;
+WHERE customer_id = :customerIDFromDropDown;
 
 UPDATE Customers
 SET first_name = :customerFName, last_name = :customerLName, address = :customerAddress, email = :customerEmail, phone_number = :customerPhone
-WHERE customer_id = :customerID;
+WHERE customer_id = :customerIDFromDropDown;
 
 -- Orders
 
 -- Select query to get the order form data of the order that is being updated
 SELECT *
 FROM Orders
-WHERE order_id = :orderID;
+WHERE order_id = :orderIDFromDropDown;
 
 UPDATE Orders
 SET order_id = :orderID, customer_id = :customerID, order_date = :orderDate, order_total = :orderTotal
-WHERE order_id = :orderID;
+WHERE order_id = :orderIDFromDropDown;
 
 -- Books_Authors
 
 -- Select query to get the book author form data of the book author that is being updated
 SELECT *
 FROM Books_Authors
-WHERE book_id = :bookID;
+WHERE book_id = :bookIDFromDropDown;
 
 UPDATE Books_Authors
 SET book_id = :bookID, author_id = :authorID
-WHERE book_id = :bookID;
+WHERE book_id = :bookIDFromDropDown;
 
 -- Books_Orders
 
 -- Select query to get the book order form data of the book order that is being updated
 SELECT *
 FROM Books_Orders
-WHERE book_id = :bookID;
+WHERE book_id = :bookIDFromDropDown;
 
 UPDATE Books_Orders
 SET book_id = :bookID, order_id = :orderID
-WHERE book_id = :bookID;
+WHERE book_id = :bookIDFromDropDown;
 
 -- -----------------------------
 -- DELETE queries
@@ -157,4 +161,8 @@ WHERE book_id = :bookID;
 -- Books_Orders
 DELETE FROM Books_Orders
 WHERE book_id = :bookID;
+
+-- Also delete from Books_Orders when deleting from Orders
+DELETE FROM Books_Orders
+WHERE order_id = :orderID;
 -- -----------------------------
