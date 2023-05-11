@@ -36,6 +36,7 @@ create = (req, res) => {
     const newCustomer = new Customer({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
+        address: req.body.address,
         email: req.body.email,
         phone: req.body.phone
         })

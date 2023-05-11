@@ -2,7 +2,7 @@
   "name": "projects-ui",
   "version": "1.0.2",
   "private": false,
-  "proxy": "http://localhost:3000",
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "@coreui/react": "^4.4.0",
     "@emotion/react": "^11.10.4",

@@ -12,7 +12,7 @@ router.get('/:authorID', authorsController.getByID);
 router.post('/', authorsController.create);
 
 // Update an author with authorID
-router.put('/:authorID', authorsController.update);
+router.put('/:authorID', authorsController.updateByID);
 
 // Delete an author with authorID
 router.delete('/:authorID', authorsController.deleteByID);

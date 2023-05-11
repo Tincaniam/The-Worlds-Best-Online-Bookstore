@@ -55,7 +55,7 @@ updateByID = (req, res) => {
         res.status(400).send({message: "Error: 400 Bad Request."});
     };
 
-    Author.updateBYID(req.params.authorID, new Author(req.body), (err, data) => {
+    Author.updateByID(req.params.authorID, new Author(req.body), (err, data) => {
         if (err) {
             if (err.kind == "not_found") {
                 res.status(404).send({message: "Author with id " + req.params.authorID + " not found."});
@@ -86,4 +86,4 @@ deleteByID = (req, res) => {
     });
 }
 
-module.exports = { getAll, getByID, create, update, deleteByID };
+module.exports = { getAll, getByID, create, updateByID, deleteByID };

@@ -75,7 +75,7 @@ updateByID = function updateByID(req, res) {
   }
 
   ;
-  Author.updateBYID(req.params.authorID, new Author(req.body), function (err, data) {
+  Author.updateByID(req.params.authorID, new Author(req.body), function (err, data) {
     if (err) {
       if (err.kind == "not_found") {
         res.status(404).send({
@@ -124,6 +124,6 @@ module.exports = {
   getAll: getAll,
   getByID: getByID,
   create: create,
-  update: update,
+  updateByID: updateByID,
   deleteByID: deleteByID
 };
