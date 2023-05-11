@@ -1,21 +1,85 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
+import CustomersTable from '../components/CustomersTable';
 
-export const CustomersPage = () => {
+function CustomersPage ({setCustomerToEdit}) {
+    const [customers, setCustomers] = React.useState([]);
+    const history = useHistory();
 
-    let history = useHistory();
+    // customer states
+    const [first_name, setFirstName] = useState('');
+    const [last_name, setLastName] = useState('');
+    const [address, setAddress] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone_number, setPhoneNumber] = useState('');
+    const [emptyFields, setEmptyFields] = useState([]);
 
-    const editCustomers1 = () => {
-        history.push('/edit-customers1');
+    const addCustomer = async () => {
+        const newCustomer = {
+            first_name,
+            last_name,
+            address,
+            email,
+            phone_number
+        };
+
+        // check for empty fields
+        const emptyFields = [];
+        if (!newCustomer.first_name) emptyFields.push('first_name');
+        if (!newCustomer.last_name) emptyFields.push('last_name');
+        if (!newCustomer.address) emptyFields.push('address');
+        if (!newCustomer.email) emptyFields.push('email');
+        // phone_number is optional
+
+        if (emptyFields.length) {
+            setEmptyFields(emptyFields);
+            return;
+        }
+
+        const response = await fetch('/api/customers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newCustomer)
+        });
+
+        if (!response.ok) {
+            const json = await response.json();
+            alert(json.error);
+            setEmptyFields(json.emptyFields);
+        }
+        else {
+            alert("Customer added!")
+            fetchCustomers();
+        }
     }
 
-    const editCustomers2 = () => {
-        history.push('/edit-customers2');
+    const editCustomer = customer => {
+        setCustomerToEdit(customer);
+        history.push('/edit-customers');
     }
 
-    const editCustomers3 = () => {
-        history.push('/edit-customers3');
+    const deleteCustomer = async customer_id => {
+        const response = await fetch(`/api/customers/${customer_id}`, {method: 'DELETE'});
+        if (response.ok) {
+            setCustomers(customers.filter(customer => customer.customer_id !== customer_id));
+        }
+        else {
+            console.log('error');
+        }
+    };
+
+    const fetchCustomers = async () => {
+        const response = await fetch('/api/customers');
+        const json = await response.json();
+        setCustomers(json);
+    };
+
+    React.useEffect(() => {
+        fetchCustomers();
     }
+    , []);
 
     return (
         <div>
@@ -23,84 +87,47 @@ export const CustomersPage = () => {
             <br />
             <h5>Add Customer</h5>
             <input
-                className='form-control'
+                className={emptyFields.includes('title') ? 'error' : 'customerField'}
                 type="text"
                 placeholder="first_name"
+                value={first_name}
+                onChange={e => setFirstName(e.target.value)}
                 />
             <input
-                className='form-control'
+                className={emptyFields.includes('title') ? 'error' : 'customerField'}
                 type="text"
                 placeholder="last_name"
+                value={last_name}
+                onChange={e => setLastName(e.target.value)}
                 />
             <input
-                className='form-control'
+                className={emptyFields.includes('title') ? 'error' : 'customerField'}
                 type="text"
                 placeholder="address"
+                value={address}
+                onChange={e => setAddress(e.target.value)}
                 />
             <input
-                className='form-control'
+                className={emptyFields.includes('title') ? 'error' : 'customerField'}
                 type="text"
-                placeholder="email_address"
+                placeholder="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 />
             <input
-                className='form-control'
+                className={emptyFields.includes('title') ? 'error' : 'customerField'}
                 type="text"
                 placeholder="phone_number"
+                value={phone_number}
+                onChange={e => setPhoneNumber(e.target.value)}
                 />
-            <button className="button-medium">Add Customer</button>
+            <button className="button-medium"
+                onClick={addCustomer}
+            >Add Customer</button>
 
-            <br /><br />
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th>customer_id</th>
-                        <th>first_name</th>
-                        <th>last_name</th>
-                        <th>address</th>
-                        <th>email_address</th>
-                        <th>phone_number</th>
-                        <th>actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Freddy</td>
-                        <td>Lupin</td>
-                        <td>1111 Wolftone Dr, New York, NY 10001</td>
-                        <td>flupin@email.com</td>
-                        <td>5038675309</td>
-                        <td>
-                            <button className="btn btn-outline-primary" onClick={editCustomers1}>Edit</button>
-                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Bob</td>
-                        <td>Bobberson</td>
-                        <td>4567 Street Dr, Oregon City, OR 97045</td>
-                        <td>bbobberson@email.com</td>
-                        <td>NULL</td>
-                        <td>
-                            <button className="btn btn-outline-primary" onClick={editCustomers2}>Edit</button>
-                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Haily</td>
-                        <td>Sharp</td>
-                        <td>22365 S Wall St, Oregon City, OR 97045</td>
-                        <td>hsharp@email.com</td>
-                        <td>NULL</td>
-                        <td>
-                            <button className="btn btn-outline-primary" onClick={editCustomers3}>Edit</button>
-                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <br />
+            <br />
+            <CustomersTable customers={customers} editCustomer={editCustomer} deleteCustomer={deleteCustomer} />
         </div>
     );
 }

@@ -1,12 +1,83 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import BooksTable from '../components/BooksTable';
+
+// helper function to normalize date format
+const normalizeDate = date => {
+    let dateParts = date.split(/[-/\.]/);
+    console.log(dateParts);
+
+    if (dateParts.length !== 3) return date;
+
+    // Reverse the date parts to get YYYY-MM-DD format
+    if ((dateParts[2].length === 4) || (dateParts[0].length === 1 && dateParts[1].length === 1)) {
+        dateParts = [dateParts[2], dateParts[1], dateParts[0]];
+    }
+    console.log(dateParts);
+
+    if (dateParts[0].length !== 4){
+        dateParts[0] = '20' + dateParts[0];
+    }
+    if (dateParts[1].length === 1){
+        dateParts[1] = '0' + dateParts[1];
+    }
+    if (dateParts[2].length === 1){
+        dateParts[2] = '0' + dateParts[2];
+    }
+    return `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}`;
+}
 
 function BooksPage ({setBookToEdit}) {
     const [books, setBooks] = React.useState([]);
     const history = useHistory();
 
-    const onDelete = async book_id => {
+    // book states
+    const [title, setTitle] = useState('');
+    const [publication_date, setPublicationDate] = useState('');
+    const [emptyFields, setEmptyFields] = useState([]);
+
+    const addBook = async () => {
+        const newBook = {
+            title,
+            publication_date
+        };
+
+        newBook.publication_date = normalizeDate(newBook.publication_date);
+
+        // check for empty fields
+        const emptyFields = [];
+        if (!newBook.title) emptyFields.push('title');
+        if (!newBook.publication_date) emptyFields.push('publication_date');
+
+        if (emptyFields.length) {
+            setEmptyFields(emptyFields);
+            return;
+        }
+        
+        const response = await fetch('/api/books', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newBook)
+        });
+
+        if (!response.ok) {
+            const json = await response.json();
+            alert(json.error);
+            setEmptyFields(json.emptyFields);
+        } else {
+            alert("Book added!")
+            fetchBooks();
+        }
+    }
+
+    const editBook = book => {
+        setBookToEdit(book);
+        history.push('/edit-books');
+    }
+
+    const deleteBook = async book_id => {
         const response = await fetch(`/api/books/${book_id}`, {method: 'DELETE'});
         if (response.ok) {
             setBooks(books.filter(book => book.book_id !== book_id));
@@ -14,11 +85,6 @@ function BooksPage ({setBookToEdit}) {
             console.log('error');
         }
     };
-
-    const onEdit = book => {
-        setBookToEdit(book);
-        history.push('/edit-books');
-    }
 
     const fetchBooks = async () => {
         const response = await fetch('/api/books');
@@ -37,97 +103,27 @@ function BooksPage ({setBookToEdit}) {
             <br />
             <h5>Add Book</h5>
             <input
-                className='form-control'
+                className={emptyFields.includes('title') ? 'error' : 'bookField'}
                 type="text"
                 placeholder="title"
+                value={title}
+                onChange={e => setTitle(e.target.value)}
                 />
             <input
-                className='form-control'
+                className={emptyFields.includes('publication_date') ? 'error' : 'bookField'}
                 type="text"
                 placeholder="publication_date"
+                value={publication_date}
+                onChange={e => setPublicationDate(e.target.value)}
                 />
-            <button className="button-medium">Add Books</button>
+            <button className="button-medium"
+                onClick={addBook}
+            >Add Book</button>
 
             <br /><br />
-            <BooksTable books={books} onDelete={onDelete} onEdit={onEdit} />
+            <BooksTable books={books} editBook={editBook} deleteBook={deleteBook} />
         </div>
     );
-
 }
-
-//     let history = useHistory();
-
-//     const editBooks1 = () => {
-//         history.push('/edit-books1');
-//     }
-
-//     const editBooks2 = () => {
-//         history.push('/edit-books2');
-//     }
-
-//     const editBooks3 = () => {
-//         history.push('/edit-books3');
-//     }
-
-//     return (
-//         <div>
-//             <h3>Books</h3>
-//             <br />
-//             <h5>Add Book</h5>
-//             <input
-//                 className='form-control'
-//                 type="text"
-//                 placeholder="title"
-//                 />
-//             <input
-//                 className='form-control'
-//                 type="text"
-//                 placeholder="publication_date"
-//                 />
-//             <button className="button-medium">Add Books</button>
-
-//             <br /><br />
-//             <table className="table table-striped">
-//                 <thead>
-//                     <tr>
-//                         <th>book_id</th>
-//                         <th>title</th>
-//                         <th>publication_date</th>
-//                         <th>actions</th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     <tr>
-//                         <td>1</td>
-//                         <td>War and Peace</td>
-//                         <td>1869-01-01</td>
-//                         <td>
-//                             <button className="btn btn-outline-primary" onClick={editBooks1}>Edit</button>
-//                             <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
-//                         </td>
-//                     </tr>
-//                     <tr>
-//                         <td>2</td>
-//                         <td>Good Omens</td>
-//                         <td>1990-05-10</td>
-//                         <td>
-//                             <button className="btn btn-outline-primary" onClick={editBooks2}>Edit</button>
-//                             <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
-//                         </td>
-//                     </tr>
-//                     <tr>
-//                         <td>3</td>
-//                         <td>To Kill a Mockingbird</td>
-//                         <td>1960-07-11</td>
-//                         <td>
-//                             <button className="btn btn-outline-primary" onClick={editBooks3}>Edit</button>
-//                             <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
-//                         </td>
-//                     </tr>
-//                 </tbody>
-//             </table>
-//         </div>
-//     );
-// }
 
 export default BooksPage;

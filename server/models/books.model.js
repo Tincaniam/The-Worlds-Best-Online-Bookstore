@@ -6,7 +6,9 @@ class Book {
         this.publication_date = book.publication_date;
     }
     static create(newBook, result) {
-        db.query("INSERT INTO Books SET ?", newBook, (err, res) => {
+        db.query(`INSERT INTO Books (title, publication_date)
+        VALUES ('${newBook.title}', '${newBook.publication_date}');`,
+        (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null); // err is the error object, null is the result
@@ -50,8 +52,11 @@ class Book {
             };
         });
     }
-    static updateByID(id, book, result) {
-        db.query("UPDATE Books SET title = ?, publication_date = ? WHERE book_id = ?", [book.title, book.publication_date, id], (err, res) => {
+    static updateByID(bookID, book, result) {
+
+        //db.query("UPDATE Books SET title = ?, publication_date = ? WHERE book_id = ?", [book.title, book.publication_date, id], (err, res) => {
+        db.query(`UPDATE Books SET title = '${book.title}', publication_date = '${book.publication_date}' WHERE book_id = ${bookID}`,
+        (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);
@@ -63,13 +68,14 @@ class Book {
                 return;
             }
             else {
-                console.log("updated book: ", { id: id, ...book });
-                result(null, { id: id, ...book });
+                console.log("updated book: ", { id: bookID, ...book });
+                result(null, { id: bookID, ...book });
             };
         });
     }
-    static deleteByID(id, result) {
-        db.query("DELETE FROM Books WHERE book_id = ?", id, (err, res) => {
+    static deleteByID(bookID, result) {
+        db.query(`DELETE FROM Books WHERE book_id = ${bookID}`,
+        (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);
@@ -81,7 +87,7 @@ class Book {
                 return;
             }
             else {
-                console.log("deleted Book with book_id: ", id);
+                console.log("deleted Book with book_id: ", bookID);
                 result(null, res);
             };
         });

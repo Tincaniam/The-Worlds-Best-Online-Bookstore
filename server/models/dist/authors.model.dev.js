@@ -27,7 +27,7 @@ function () {
   _createClass(Author, null, [{
     key: "create",
     value: function create(newAuthor, result) {
-      db.query("INSERT INTO Authors SET ?", newAuthor, function (err, res) {
+      db.query("INSERT INTO Authors (first_name, last_name)\n        VALUES ('".concat(newAuthor.first_name, "', '").concat(newAuthor.last_name, "');"), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null); // err is the error object, null is the result
@@ -35,10 +35,10 @@ function () {
           return;
         } else {
           console.log("created author: ", _objectSpread({
-            id: res.insertId
+            id: res.authorID
           }, newAuthor));
           result(null, _objectSpread({
-            id: res.insertId
+            id: res.authorID
           }, newAuthor));
         }
 
@@ -85,8 +85,9 @@ function () {
     }
   }, {
     key: "updateByID",
-    value: function updateByID(id, author, result) {
-      db.query("UPDATE Authors SET first_name = ?, last_name = ? WHERE author_id = ?", [author.first_name, author.last_name, id], function (err, res) {
+    value: function updateByID(authorID, author, result) {
+      //db.query("UPDATE Authors SET first_name = ?, last_name = ? WHERE author_id = ?", [author.first_name, author.last_name, id], (err, res) => {
+      db.query("UPDATE Authors SET first_name = '".concat(author.first_name, "', last_name = '").concat(author.last_name, "' WHERE author_id = ").concat(authorID, ";"), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);
@@ -98,11 +99,9 @@ function () {
           }, null);
           return;
         } else {
-          console.log("updated author: ", _objectSpread({
-            id: id
-          }, author));
+          console.log("updated author: ", res);
           result(null, _objectSpread({
-            id: id
+            id: authorID
           }, author));
         }
 
@@ -111,8 +110,8 @@ function () {
     }
   }, {
     key: "deleteByID",
-    value: function deleteByID(id, result) {
-      db.query("DELETE FROM Authors WHERE author_id = ?", id, function (err, res) {
+    value: function deleteByID(authorID, result) {
+      db.query("DELETE FROM Authors WHERE author_id = ".concat(authorID), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);
