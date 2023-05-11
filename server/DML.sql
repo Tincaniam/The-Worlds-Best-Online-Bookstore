@@ -165,16 +165,32 @@ WHERE book_id = :bookIDFromDropDown;
 DELETE FROM Books
 WHERE book_id = :bookID;
 
+-- Also delete from Books_Authors when deleting from Books
+DELETE FROM Books_Authors
+WHERE book_id = :bookID;
+
 -- Authors
 DELETE FROM Authors
+WHERE author_id = :authorID;
+
+-- Also delete from Books_Authors when deleting from Authors
+DELETE FROM Books_Authors
 WHERE author_id = :authorID;
 
 -- Customers
 DELETE FROM Customers
 WHERE customer_id = :customerID;
 
+-- Also delete from Orders when deleting from Customers
+DELETE FROM Orders
+WHERE customer_id = :customerID;
+
 -- Orders
 DELETE FROM Orders
+WHERE order_id = :orderID;
+
+-- Also delete from Books_Orders when deleting from Orders
+DELETE FROM Books_Orders
 WHERE order_id = :orderID;
 
 -- Books_Authors
@@ -185,7 +201,4 @@ WHERE book_id = :bookID;
 DELETE FROM Books_Orders
 WHERE book_id = :bookID;
 
--- Also delete from Books_Orders when deleting from Orders
-DELETE FROM Books_Orders
-WHERE order_id = :orderID;
 -- -----------------------------
