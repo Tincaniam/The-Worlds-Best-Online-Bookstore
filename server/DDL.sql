@@ -67,18 +67,35 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Orders`
 -- -----------------------------------------------------
-CREATE OR REPLACE TABLE Orders (
+CREATE OR REPLACE TABLE `Orders` (
   `order_id` INT NOT NULL AUTO_INCREMENT,
   `customer_id` INT NOT NULL,
   `order_date` DATETIME NOT NULL,
   `order_total` DECIMAL(10,2) NOT NULL,
+  `discount_code_id` INT NULL,
   PRIMARY KEY (`order_id`),
   INDEX `fk_orders_customers1_idx` (`customer_id` ASC) VISIBLE,
+  INDEX `fk_Orders_Discount_Codes1_idx` (`discount_code_id` ASC) VISIBLE,
   CONSTRAINT `fk_orders_customers1`
     FOREIGN KEY (`customer_id`)
     REFERENCES `Customers` (`customer_id`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Orders_Discount_Codes1`
+    FOREIGN KEY (`discount_code_id`)
+    REFERENCES `Discount_Codes` (`discount_code_id`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `Discount_Codes`
+-- -----------------------------------------------------
+CREATE OR REPLACE TABLE `Discount_Codes` (
+  `discount_code_id` INT NOT NULL AUTO_INCREMENT,
+  `discount_code_name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`discount_code_id`),
+  UNIQUE INDEX `discount_code_name_UNIQUE` (`discount_code_name` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -186,24 +203,44 @@ VALUES
 SELECT * FROM Customers;
 
 -- -------------------------------------------------
+-- Discount_Codes
+-- -------------------------------------------------
+INSERT INTO Discount_Codes (discount_code_name)
+VALUES
+(
+    '10OFF'
+),
+(
+    '20OFF'
+),
+(
+    '30OFF'
+);
+
+SELECT * FROM Discount_Codes;
+
+-- -------------------------------------------------
 -- Orders
 -- -------------------------------------------------
-INSERT INTO Orders (customer_id, order_date, order_total)
+INSERT INTO Orders (customer_id, order_date, order_total, discount_code_id)
 VALUES
 (
     (SELECT customer_id FROM Customers WHERE first_name = 'Freddy' AND last_name = 'Lupin'),
     20230103070545,
-    24.95
+    24.95,
+    (SELECT discount_code_id FROM Discount_Codes WHERE discount_code_name = '10OFF')
 ),
 (
     (SELECT customer_id FROM Customers WHERE first_name = 'Freddy' AND last_name = 'Lupin'),
     20220823232400,
-    99.75
+    99.75,
+    (SELECT discount_code_id FROM Discount_Codes WHERE discount_code_name = '30OFF')
 ),
 (
     (SELECT customer_id FROM Customers WHERE first_name = 'Haily' AND last_name = 'Sharp'),
     20230503120328,
-    55.12
+    55.12,
+    NULL
 );
 
 SELECT * FROM Orders;

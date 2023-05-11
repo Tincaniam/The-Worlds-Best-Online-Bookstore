@@ -63,6 +63,20 @@ function HomePage() {
                 Go to the Orders page.
             </ReactTooltip>
 
+            <Link to="/discount-codes">
+                <button
+                type="button"
+                className="button-medium"
+                data-tip data-for="discount-codesTip"
+                aria-label="discount-codes"
+                >
+                Discount Codes
+                </button>
+            </Link>
+            <ReactTooltip delayShow={1000} id="discount-codesTip" place="top" effect="solid">
+                Go to the Discount Codes page.
+            </ReactTooltip>
+
             <Link to="/books_authors">
                 <button
                 type="button"

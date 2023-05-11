@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AuthorsPage from './pages/AuthorsPage';
 import OrdersPage from './pages/OrdersPage';
+import DiscountCodesPage from './pages/DiscountCodesPage';
 import BooksPage from './pages/BooksPage';
 import CustomersPage from './pages/CustomersPage';
 import BooksAuthorsPage from './pages/BooksAuthorsPage';
@@ -59,6 +60,7 @@ function App() {
           </Typography>
           
           <div className = "toolBarLinks">
+
           <Link to="/books">
             <button
               type="button"
@@ -113,6 +115,19 @@ function App() {
             Go to the Orders page.
           </ReactTooltip>
 
+          <Link to="/discount-codes">
+            <button
+              type="button"
+              className="button-medium"
+              data-tip data-for="discount_codesTip"
+              aria-label="discount_codes">
+            Discount_Codes
+            </button>
+          </Link>
+          <ReactTooltip delayShow={1000} id="discount_codesTip" place="top" effect="solid">
+            Go to the Discount_Codes page.
+          </ReactTooltip>
+
           <Link to="/books_authors">
             <button
               type="button"
@@ -160,6 +175,9 @@ function App() {
           </Route>
           <Route path="/orders">
             <OrdersPage />
+          </Route>
+          <Route path="/discount-codes">
+            <DiscountCodesPage />
           </Route>
           <Route path="/books_authors">
             <BooksAuthorsPage/>

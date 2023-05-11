@@ -21,8 +21,15 @@ SELECT * FROM Authors;
 -- Customers
 SELECT * FROM Customers;
 
--- Orders
-SELECT * FROM Orders;
+-- Orders, join in Customers table for customer name and Discount_Codes table for discount code name
+SELECT Orders.order_id, Orders.customer_id, CONCAT(Customers.first_name, " ", Customers.last_name) AS customer_name, Orders.order_date, Orders.order_total, Orders.discount_code_id, Discount_Codes.discount_code_name
+FROM Orders
+INNER JOIN Customers ON Orders.customer_id = Customers.customer_id
+-- Outer join in Discount_Codes table for discount code name if there is one
+LEFT OUTER JOIN Discount_Codes ON Orders.discount_code_id = Discount_Codes.discount_code_id;
+
+-- Discount_Codes
+SELECT * FROM Discount_Codes;
 
 -- Books_Authors SELECT, include joins in drop down for ease of use
 SELECT Books.title AS book_title, CONCAT(Authors.first_name, " ", Authors.last_name) AS author_name
@@ -55,12 +62,21 @@ INSERT INTO Customers (first_name, last_name, address, email, phone_number)
 VALUES (:customerFName, :customerLName, :customerAddress, :customerEmail, :customerPhone);
 
 -- Select query for drop down to get the customer form data of the customer FK
-SELECT * FROM Customers
+SELECT CONCAT(first_name, " ", last_name) AS customer_name
+FROM Customers
 WHERE customer_id = :customerIDFromDropDown;
 
 -- Orders, include FK customer_id from drop down
-INSERT INTO Orders (order_id, customer_id, order_date, order_total)
+INSERT INTO Orders (order_id, customer_id, order_date, order_total, discount_code_id)
 VALUES (:orderID, :customerIDFromDropDown, :orderDate, :orderTotal);
+
+-- Discount_Codes SELECT used by drop downs for Orders INSERT
+SELECT discount_code_name FROM Discount_Codes
+WHERE discount_code_id = :discountCodeIDFromDropDown;
+
+-- Discount_Codes
+INSERT INTO Discount_Codes (discount_code_name)
+VALUES (:discountCodeName);
 
 -- Books_Orders SELECT used by drop downs for INSERT
 -- Books_Orders SELECT, include joins in drop down for ease of use
@@ -132,7 +148,7 @@ FROM Orders
 WHERE order_id = :orderIDFromDropDown;
 
 UPDATE Orders
-SET order_id = :orderID, customer_id = :customerID, order_date = :orderDate, order_total = :orderTotal
+SET order_id = :orderID, customer_id = :customerID, order_date = :orderDate, order_total = :orderTotal, discount_code_id = :discountCodeID
 WHERE order_id = :orderIDFromDropDown;
 
 -- Books_Authors
@@ -192,6 +208,10 @@ WHERE order_id = :orderID;
 -- Also delete from Books_Orders when deleting from Orders
 DELETE FROM Books_Orders
 WHERE order_id = :orderID;
+
+-- Discount_Codes
+DELETE FROM Discount_Codes
+WHERE discount_code_id = :discountCodeID;
 
 -- Books_Authors
 DELETE FROM Books_Authors
