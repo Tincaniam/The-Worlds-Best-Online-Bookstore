@@ -24,11 +24,17 @@ SELECT * FROM Customers;
 -- Orders
 SELECT * FROM Orders;
 
--- Books_Authors
-SELECT * FROM Books_Authors;
+-- Books_Authors SELECT, include joins in drop down for ease of use
+SELECT Books.title AS book_title, CONCAT(Authors.first_name, " ", Authors.last_name) AS author_name
+FROM Books_Authors
+INNER JOIN Books ON Books_Authors.book_id = Books.book_id
+INNER JOIN Authors ON Books_Authors.author_id = Authors.author_id;
 
--- Books_Orders
-SELECT * FROM Books_Orders;
+-- Books_Orders SELECT, include joins in drop down for ease of use
+SELECT Books.book_id, Books.title AS book_title, Orders.order_id, Orders.order_date, Orders.order_total
+FROM Books_Orders
+INNER JOIN Books ON Books_Orders.book_id = Books.book_id
+INNER JOIN Orders ON Books_Orders.order_id = Orders.order_id;
 
 -- -----------------------------
 -- INSERT queries
@@ -48,17 +54,36 @@ VALUES (:authorFNameFromDropDown, :authorLNameFromDropDown);
 INSERT INTO Customers (first_name, last_name, address, email, phone_number)
 VALUES (:customerFName, :customerLName, :customerAddress, :customerEmail, :customerPhone);
 
+-- Select query for drop down to get the customer form data of the customer FK
+SELECT * FROM Customers
+WHERE customer_id = :customerIDFromDropDown;
+
 -- Orders, include FK customer_id from drop down
 INSERT INTO Orders (order_id, customer_id, order_date, order_total)
 VALUES (:orderID, :customerIDFromDropDown, :orderDate, :orderTotal);
+
+-- Books_Orders SELECT used by drop downs for INSERT
+-- Books_Orders SELECT, include joins in drop down for ease of use
+SELECT Books.book_id, Books.title AS book_title, Orders.order_id, Orders.order_date, Orders.order_total
+FROM Books_Orders
+INNER JOIN Books ON Books_Orders.book_id = Books.book_id
+INNER JOIN Orders ON Books_Orders.order_id = Orders.order_id;
 
 -- Also add to Books_Orders when adding to Orders
 INSERT INTO Books_Orders (book_id, order_id)
 VALUES (:bookIDFromDropDown, :orderID);
 
+-- Books_Authors SELECT used by drop downs for INSERT
+-- Books_Authors SELECT, include joins in drop down for ease of use
+SELECT Books.book_id, Books.title AS book_title, Authors.author_id, CONCAT(Authors.first_name, " ", Authors.last_name) AS author_name
+FROM Books_Authors
+INNER JOIN Books ON Books_Authors.book_id = Books.book_id
+INNER JOIN Authors ON Books_Authors.author_id = Authors.author_id;
+
 -- Books_Authors
 INSERT INTO Books_Authors (book_id, author_id)
 VALUES (:bookIDFromDropDown, :authorIDFromDropDown);
+
 
 -- -----------------------------
 -- UPDATE queries
@@ -111,7 +136,6 @@ SET order_id = :orderID, customer_id = :customerID, order_date = :orderDate, ord
 WHERE order_id = :orderIDFromDropDown;
 
 -- Books_Authors
-
 -- Select query to get the book author form data of the book author that is being updated
 SELECT *
 FROM Books_Authors
@@ -122,7 +146,6 @@ SET book_id = :bookID, author_id = :authorID
 WHERE book_id = :bookIDFromDropDown;
 
 -- Books_Orders
-
 -- Select query to get the book order form data of the book order that is being updated
 SELECT *
 FROM Books_Orders
