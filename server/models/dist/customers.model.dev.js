@@ -23,14 +23,14 @@ function () {
     this.first_name = customer.first_name;
     this.last_name = customer.last_name;
     this.address = customer.address;
-    this.email = customer.email;
-    this.phone = customer.phone;
+    this.email_address = customer.email_address;
+    this.phone_number = customer.phone_number;
   }
 
   _createClass(Customer, null, [{
     key: "create",
     value: function create(newCustomer, result) {
-      db.query("INSERT INTO Customers (first_name, last_name, address, email, phone)\n        VALUES ('".concat(newCustomer.first_name, "', '").concat(newCustomer.last_name, "', '").concat(newCustomer.address, "', '").concat(newCustomer.email, "', '").concat(newCustomer.phone, "');"), function (err, res) {
+      db.query("INSERT INTO Customers (first_name, last_name, address, email_address, phone_number)\n        VALUES ('".concat(newCustomer.first_name, "', '").concat(newCustomer.last_name, "', '").concat(newCustomer.address, "', '").concat(newCustomer.email_address, "', '").concat(newCustomer.phone_number, "');"), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null); // err is the error object, null is the result
@@ -90,7 +90,7 @@ function () {
     key: "updateByID",
     value: function updateByID(customerID, customer, result) {
       //db.query(`UPDATE Customers SET first_name = , last_name = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zip_code = ? WHERE customer_id = ?`,
-      db.query("UPDATE Customers SET first_name = '".concat(customer.first_name, "', last_name = '").concat(customer.last_name, "', address = '").concat(customer.address, "', email = '").concat(customer.email, "', phone = '").concat(customer.phone, "', WHERE customer_id = ").concat(id), function (err, res) {
+      db.query("UPDATE Customers SET first_name = '".concat(customer.first_name, "', last_name = '").concat(customer.last_name, "', address = '").concat(customer.address, "', email_address = '").concat(customer.email_address, "', phone_number = '").concat(customer.phone_number, "', WHERE customer_id = ").concat(id), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);
@@ -126,7 +126,7 @@ function () {
           }, null);
           return;
         } else {
-          console.log("deleted customer with customer_id: ", id);
+          console.log("deleted customer with customer_id: ", customerID);
           result(null, res);
         }
 

@@ -39,8 +39,6 @@ getByID = function getByID(req, res) {
 };
 
 create = function create(req, res) {
-  console.log(req.body);
-
   if (!req.body) {
     res.status(400).send({
       message: "No content in request body."
@@ -52,8 +50,8 @@ create = function create(req, res) {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     address: req.body.address,
-    email: req.body.email,
-    phone: req.body.phone
+    email_address: req.body.email_address,
+    phone_number: req.body.phone_number
   });
   console.log("newCustomer: ");
   console.log(newCustomer);

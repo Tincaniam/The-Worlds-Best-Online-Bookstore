@@ -10,7 +10,7 @@ function CustomersPage ({setCustomerToEdit}) {
     const [first_name, setFirstName] = useState('');
     const [last_name, setLastName] = useState('');
     const [address, setAddress] = useState('');
-    const [email, setEmail] = useState('');
+    const [email_address, setEmailAddress] = useState('');
     const [phone_number, setPhoneNumber] = useState('');
     const [emptyFields, setEmptyFields] = useState([]);
 
@@ -19,9 +19,11 @@ function CustomersPage ({setCustomerToEdit}) {
             first_name,
             last_name,
             address,
-            email,
+            email_address,
             phone_number
         };
+
+        console.log(newCustomer)
 
         // check for empty fields
         const emptyFields = [];
@@ -110,9 +112,9 @@ function CustomersPage ({setCustomerToEdit}) {
             <input
                 className={emptyFields.includes('title') ? 'error' : 'customerField'}
                 type="text"
-                placeholder="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
+                placeholder="email_address"
+                value={email_address}
+                onChange={e => setEmailAddress(e.target.value)}
                 />
             <input
                 className={emptyFields.includes('title') ? 'error' : 'customerField'}

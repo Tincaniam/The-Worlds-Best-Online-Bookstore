@@ -4,6 +4,7 @@ function Customer({ customer, editCustomer, deleteCustomer }) {
     return (
 
         <tr>
+            <td>{customer.customer_id}</td>
             <td>{customer.first_name}</td>
             <td>{customer.last_name}</td>
             <td>{customer.address}</td>

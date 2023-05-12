@@ -5,13 +5,13 @@ class Customer {
         this.first_name = customer.first_name;
         this.last_name = customer.last_name;
         this.address = customer.address;
-        this.email = customer.email;
-        this.phone = customer.phone;
+        this.email_address = customer.email_address;
+        this.phone_number = customer.phone_number;
     }
 
     static create(newCustomer, result) {
-        db.query(`INSERT INTO Customers (first_name, last_name, address, email, phone)
-        VALUES ('${newCustomer.first_name}', '${newCustomer.last_name}', '${newCustomer.address}', '${newCustomer.email}', '${newCustomer.phone}');`,
+        db.query(`INSERT INTO Customers (first_name, last_name, address, email_address, phone_number)
+        VALUES ('${newCustomer.first_name}', '${newCustomer.last_name}', '${newCustomer.address}', '${newCustomer.email_address}', '${newCustomer.phone_number}');`,
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -61,7 +61,7 @@ class Customer {
 
     static updateByID(customerID, customer, result) {
         //db.query(`UPDATE Customers SET first_name = , last_name = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zip_code = ? WHERE customer_id = ?`,
-        db.query(`UPDATE Customers SET first_name = '${customer.first_name}', last_name = '${customer.last_name}', address = '${customer.address}', email = '${customer.email}', phone = '${customer.phone}', WHERE customer_id = ${id}`,
+        db.query(`UPDATE Customers SET first_name = '${customer.first_name}', last_name = '${customer.last_name}', address = '${customer.address}', email_address = '${customer.email_address}', phone_number = '${customer.phone_number}', WHERE customer_id = ${id}`,
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -94,7 +94,7 @@ class Customer {
                 return;
             }
             else {
-                console.log("deleted customer with customer_id: ", id);
+                console.log("deleted customer with customer_id: ", customerID);
                 result(null, res);
             };
         });

@@ -6,6 +6,7 @@ function CustomersTable({ customers, editCustomer, deleteCustomer }) {
         <table className="table table-striped">
             <thead>
                 <tr>
+                    <th>customer_id</th>
                     <th>first_name</th>
                     <th>last_name</th>
                     <th>address</th>
