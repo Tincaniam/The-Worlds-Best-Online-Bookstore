@@ -10,7 +10,7 @@ function CustomersTable({ customers, editCustomer, deleteCustomer }) {
                     <th>first_name</th>
                     <th>last_name</th>
                     <th>address</th>
-                    <th>email</th>
+                    <th>email_address</th>
                     <th>phone_number</th>
                     <th>actions</th>
                 </tr>

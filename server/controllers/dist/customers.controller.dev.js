@@ -76,7 +76,7 @@ updateByID = function updateByID(req, res) {
   }
 
   ;
-  Customer.updateBYID(req.params.customerID, new Customer(req.body), function (err, data) {
+  Customer.updateByID(req.params.customerID, new Customer(req.body), function (err, data) {
     if (err) {
       if (err.kind == "not_found") {
         res.status(404).send({

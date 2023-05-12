@@ -30,7 +30,7 @@ function CustomersPage ({setCustomerToEdit}) {
         if (!newCustomer.first_name) emptyFields.push('first_name');
         if (!newCustomer.last_name) emptyFields.push('last_name');
         if (!newCustomer.address) emptyFields.push('address');
-        if (!newCustomer.email) emptyFields.push('email');
+        if (!newCustomer.email_address) emptyFields.push('email_address');
         // phone_number is optional
 
         if (emptyFields.length) {

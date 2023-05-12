@@ -57,7 +57,7 @@ updateByID = (req, res) => {
         res.status(400).send({message: "Error: 400 Bad Request."});
     };
 
-    Customer.updateBYID(req.params.customerID, new Customer(req.body), (err, data) => {
+    Customer.updateByID(req.params.customerID, new Customer(req.body), (err, data) => {
         if (err) {
             if (err.kind == "not_found") {
                 res.status(404).send({message: "Customer with id " + req.params.customerID + " not found."});

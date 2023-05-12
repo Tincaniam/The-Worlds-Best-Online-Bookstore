@@ -19,8 +19,8 @@ class Customer {
                 return;
             }
             else {
-                console.log("created customer: ", { id: res.insertId, ...newCustomer });
-                result(null, { id: res.insertId, ...newCustomer });
+                console.log("created customer: ", { res });
+                result(null, { res });
             };
 
         });
@@ -61,7 +61,7 @@ class Customer {
 
     static updateByID(customerID, customer, result) {
         //db.query(`UPDATE Customers SET first_name = , last_name = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zip_code = ? WHERE customer_id = ?`,
-        db.query(`UPDATE Customers SET first_name = '${customer.first_name}', last_name = '${customer.last_name}', address = '${customer.address}', email_address = '${customer.email_address}', phone_number = '${customer.phone_number}', WHERE customer_id = ${id}`,
+        db.query(`UPDATE Customers SET first_name = '${customer.first_name}', last_name = '${customer.last_name}', address = '${customer.address}', email_address = '${customer.email_address}', phone_number = '${customer.phone_number}' WHERE customer_id = ${customerID}`,
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -74,8 +74,8 @@ class Customer {
                 return;
             }
             else {
-                console.log("updated customer: ", { id: id, ...customer });
-                result(null, { id: id, ...customer });
+                console.log("updated customer: ", { res });
+                result(null, { res });
             }
         });
     }

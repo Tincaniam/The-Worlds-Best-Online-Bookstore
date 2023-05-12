@@ -6,7 +6,7 @@ export const EditCustomersPage = ({customerToEdit}) => {
     const [first_name, setFirstName] = useState(customerToEdit.first_name);
     const [last_name, setLastName] = useState(customerToEdit.last_name);
     const [address, setAddress] = useState(customerToEdit.address);
-    const [email_address, setEmailAddress] = useState(customerToEdit.email);
+    const [email_address, setEmailAddress] = useState(customerToEdit.email_address);
     const [phone_number, setPhoneNumber] = useState(customerToEdit.phone_number);
     const [emptyFields, setEmptyFields] = useState([]);
 
@@ -32,7 +32,7 @@ export const EditCustomersPage = ({customerToEdit}) => {
             setEmptyFields(json.emptyFields);
         } else {
             alert("Customer edited!")
-            history.push('/customer');
+            history.push('/customers');
         }
     };
 
@@ -60,7 +60,7 @@ export const EditCustomersPage = ({customerToEdit}) => {
                 onChange={e => setAddress(e.target.value)}
                 />
             <input
-                className={emptyFields.includes("email") ? "error" : "customerField"}
+                className={emptyFields.includes("email_address") ? "error" : "customerField"}
                 type="text"
                 value = {email_address}
                 onChange={e => setEmailAddress(e.target.value)}
