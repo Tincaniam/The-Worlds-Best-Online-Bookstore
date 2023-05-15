@@ -15,8 +15,8 @@ class Book {
                 return;
             }
             else {
-                console.log("created book: ", { id: res.insertId, ...newBook });
-                result(null, { id: res.insertId, ...newBook });
+                console.log("created book: ", { res });
+                result(null, { res });
             };
 
         });
@@ -68,8 +68,8 @@ class Book {
                 return;
             }
             else {
-                console.log("updated book: ", { id: bookID, ...book });
-                result(null, { id: bookID, ...book });
+                console.log("updated book: ", { res });
+                result(null, { res });
             };
         });
     }

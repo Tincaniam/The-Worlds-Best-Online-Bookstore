@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
 
-
 export const EditBooksPage = ({bookToEdit}) => {
 
     const [title, setTitle] = useState(bookToEdit.title);
@@ -47,7 +46,7 @@ export const EditBooksPage = ({bookToEdit}) => {
                 />
             <input
                 className={emptyFields.includes("publication_date") ? "error" : "bookField"}
-                type="text"
+                type="date"
                 value = {publication_date}
                 onChange={e => setPublicationDate(e.target.value)}
                 />

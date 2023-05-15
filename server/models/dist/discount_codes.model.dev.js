@@ -6,29 +6,31 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var db = require('../db-connector');
+var db = require("../db-connector.js");
 
-var Book =
+var _require = require("./books.model.js"),
+    deleteByID = _require.deleteByID;
+
+var DiscountCode =
 /*#__PURE__*/
 function () {
-  function Book(book) {
-    _classCallCheck(this, Book);
+  function DiscountCode(discount_code) {
+    _classCallCheck(this, DiscountCode);
 
-    this.title = book.title;
-    this.publication_date = book.publication_date;
+    this.discount_code_name = discount_code.discount_code_name;
   }
 
-  _createClass(Book, null, [{
+  _createClass(DiscountCode, null, [{
     key: "create",
-    value: function create(newBook, result) {
-      db.query("INSERT INTO Books (title, publication_date)\n        VALUES ('".concat(newBook.title, "', '").concat(newBook.publication_date, "');"), function (err, res) {
+    value: function create(newDiscountCode, result) {
+      db.query("INSERT INTO Discount_Codes (discount_code_name)\n        VALUES ('".concat(newDiscountCode.discount_code_name, "');"), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null); // err is the error object, null is the result
 
           return;
         } else {
-          console.log("created book: ", {
+          console.log("created discount code: ", {
             res: res
           });
           result(null, {
@@ -41,18 +43,18 @@ function () {
     }
   }, {
     key: "getById",
-    value: function getById(bookId, result) {
-      db.query("SELECT * FROM Books WHERE book_id = ".concat(bookId), function (err, res) {
+    value: function getById(discountCodeId, result) {
+      db.query("SELECT * FROM Discount_Codes WHERE discount_code_id = ".concat(discountCodeId), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);
           return;
         } else if (res.length) {
-          console.log("found book: ", res[0]);
+          console.log("found discount code: ", res[0]);
           result(null, res[0]);
           return;
         } else {
-          // book with the id not found
+          // discount code with the id not found
           result({
             kind: "not_found"
           }, null);
@@ -64,13 +66,13 @@ function () {
   }, {
     key: "getAll",
     value: function getAll(result) {
-      db.query("SELECT * FROM Books", function (err, res) {
+      db.query("SELECT * FROM Discount_Codes", function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);
           return;
         } else {
-          console.log("Books: ", res);
+          console.log("Discount Codes: ", res);
           result(null, res);
         }
 
@@ -78,48 +80,20 @@ function () {
       });
     }
   }, {
-    key: "updateByID",
-    value: function updateByID(bookID, book, result) {
-      //db.query("UPDATE Books SET title = ?, publication_date = ? WHERE book_id = ?", [book.title, book.publication_date, id], (err, res) => {
-      db.query("UPDATE Books SET title = '".concat(book.title, "', publication_date = '").concat(book.publication_date, "' WHERE book_id = ").concat(bookID), function (err, res) {
-        if (err) {
-          console.log("error: ", err);
-          result(err, null);
-          return;
-        } else if (res.affectedRows == 0) {
-          // book with the id not found
-          result({
-            kind: "not_found"
-          }, null);
-          return;
-        } else {
-          console.log("updated book: ", {
-            res: res
-          });
-          result(null, {
-            res: res
-          });
-        }
-
-        ;
-      });
-    }
-  }, {
     key: "deleteByID",
-    value: function deleteByID(bookID, result) {
-      db.query("DELETE FROM Books WHERE book_id = ".concat(bookID), function (err, res) {
+    value: function deleteByID(discountCodeID, result) {
+      db.query("DELETE FROM Discount_Codes WHERE discount_code_id = ".concat(discountCodeID), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);
           return;
         } else if (res.affectedRows == 0) {
-          // book with the id not found
+          // discount code with the id not found
           result({
             kind: "not_found"
           }, null);
-          return;
         } else {
-          console.log("deleted Book with book_id: ", bookID);
+          console.log("deleted discount code with id: ", discountCodeID);
           result(null, res);
         }
 
@@ -128,7 +102,7 @@ function () {
     }
   }]);
 
-  return Book;
+  return DiscountCode;
 }();
 
-module.exports = Book;
+module.exports = DiscountCode;

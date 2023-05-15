@@ -1,5 +1,8 @@
 const db = require("../db-connector.js");
 
+const disableForeignKeyChecks = `SET FOREIGN_KEY_CHECKS=0;`;
+const enableForeignKeyChecks = `SET FOREIGN_KEY_CHECKS=1;`;
+
 class Order {
     constructor(order) {
         this.customer_id = order.customer_id;
@@ -8,9 +11,12 @@ class Order {
         this.discount_code_id = order.discount_code_id;
     }
 
-    static create(newOrder, result) {
-        db.query(`INSERT INTO Orders (customer_id, order_date, order_total, discount_code_id)
-        VALUES ('${newOrder.customer_id}', '${newOrder.order_date}', '${newOrder.order_total}', '${newOrder.discount_code_id}');`,
+    static createQuery(newOrder, result) {
+        db.query(`
+        INSERT INTO Orders (customer_id, order_date, order_total, discount_code_id)
+        VALUES ('${newOrder.customer_id}', '${newOrder.order_date}', '${newOrder.order_total}', '${newOrder.discount_code_id}');
+        `,
+
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -18,8 +24,31 @@ class Order {
                 return;
             }
             else {
-                console.log("created order: ", { id: res.insertId, ...newOrder });
-                result(null, { id: res.insertId, ...newOrder });
+                console.log("created order: ", { res });
+                result(null, { res });
+            };
+        });
+    }
+
+    static create(newOrder, result) {
+        db.query(disableForeignKeyChecks, (err, res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+                return;
+            }
+            else {
+                Order.createQuery(newOrder, result);
+                db.query(enableForeignKeyChecks, (err, res) => {
+                    if (err) {
+                        console.log("error: ", err);
+                        result(err, null);
+                        return;
+                    }
+                    else {
+                        console.log("Foreign Key Checks Enabled");
+                    };
+                }); 
             };
         });
     }
@@ -71,8 +100,8 @@ class Order {
                 result({ kind: "not_found" }, null);
             }
             else {
-                console.log("updated order: ", { id: orderID, ...order });
-                result(null, { id: orderID, ...order });
+                console.log("updated order: ", { res });
+                result(null, { res });
             };
         });
     }

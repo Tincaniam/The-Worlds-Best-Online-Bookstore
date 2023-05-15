@@ -35,8 +35,9 @@ create = (req, res) => {
 
     const newOrder = new Order({
         customer_id: req.body.customer_id,
-        product_id: req.body.product_id,
-        quantity: req.body.quantity
+        order_date: req.body.order_date,
+        order_total: req.body.order_total,
+        discount_code_id: req.body.discount_code_id
         })
         console.log("newOrder: ");
         console.log(newOrder);

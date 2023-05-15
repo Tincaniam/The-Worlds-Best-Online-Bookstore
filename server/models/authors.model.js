@@ -16,8 +16,8 @@ class Author {
                 return;
             }
             else {
-                console.log("created author: ", { id: res.authorID, ...newAuthor });
-                result(null, { id: res.authorID, ...newAuthor });
+                console.log("created author: ", { res });
+                result(null, { res });
             };
 
         });
@@ -72,7 +72,7 @@ class Author {
             }
             else {
                 console.log("updated author: ", res);
-                result(null, { id: authorID, ...author });
+                result(null, { res });
             };
         });
     }

@@ -1,11 +1,5 @@
 "use strict";
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -13,6 +7,9 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var db = require("../db-connector.js");
+
+var disableForeignKeyChecks = "SET FOREIGN_KEY_CHECKS=0;";
+var enableForeignKeyChecks = "SET FOREIGN_KEY_CHECKS=1;";
 
 var Order =
 /*#__PURE__*/
@@ -27,21 +24,47 @@ function () {
   }
 
   _createClass(Order, null, [{
-    key: "create",
-    value: function create(newOrder, result) {
-      db.query("INSERT INTO Orders (customer_id, order_date, order_total, discount_code_id)\n        VALUES ('".concat(newOrder.customer_id, "', '").concat(newOrder.order_date, "', '").concat(newOrder.order_total, "', '").concat(newOrder.discount_code_id, "');"), function (err, res) {
+    key: "createQuery",
+    value: function createQuery(newOrder, result) {
+      db.query("\n        INSERT INTO Orders (customer_id, order_date, order_total, discount_code_id)\n        VALUES ('".concat(newOrder.customer_id, "', '").concat(newOrder.order_date, "', '").concat(newOrder.order_total, "', '").concat(newOrder.discount_code_id, "');\n        "), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null); // err is the error object, null is the result
 
           return;
         } else {
-          console.log("created order: ", _objectSpread({
-            id: res.insertId
-          }, newOrder));
-          result(null, _objectSpread({
-            id: res.insertId
-          }, newOrder));
+          console.log("created order: ", {
+            res: res
+          });
+          result(null, {
+            res: res
+          });
+        }
+
+        ;
+      });
+    }
+  }, {
+    key: "create",
+    value: function create(newOrder, result) {
+      db.query(disableForeignKeyChecks, function (err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+          return;
+        } else {
+          Order.createQuery(newOrder, result);
+          db.query(enableForeignKeyChecks, function (err, res) {
+            if (err) {
+              console.log("error: ", err);
+              result(err, null);
+              return;
+            } else {
+              console.log("Foreign Key Checks Enabled");
+            }
+
+            ;
+          });
         }
 
         ;
@@ -99,12 +122,12 @@ function () {
             kind: "not_found"
           }, null);
         } else {
-          console.log("updated order: ", _objectSpread({
-            id: orderID
-          }, order));
-          result(null, _objectSpread({
-            id: orderID
-          }, order));
+          console.log("updated order: ", {
+            res: res
+          });
+          result(null, {
+            res: res
+          });
         }
 
         ;

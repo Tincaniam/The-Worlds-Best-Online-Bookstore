@@ -59,3 +59,16 @@ content-type: application/json
 
 ### Delete Customer By ID
 DELETE http://localhost:4000/api/customers/7 HTTP/1.1
+
+### Get All Orders
+GET http://localhost:4000/api/orders HTTP/1.1
+
+### Create an order
+POST http://localhost:4000/api/orders HTTP/1.1
+content-type: application/json
+
+{
+    "customer_id": 1,
+    "order_date": "2020-01-01",
+    "order_total": 100.00
+}

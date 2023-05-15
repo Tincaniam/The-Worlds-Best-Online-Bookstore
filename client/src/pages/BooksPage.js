@@ -1,31 +1,7 @@
 import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import BooksTable from '../components/BooksTable';
-
-// helper function to normalize date format
-const normalizeDate = date => {
-    let dateParts = date.split(/[-/\.]/);
-    console.log(dateParts);
-
-    if (dateParts.length !== 3) return date;
-
-    // Reverse the date parts to get YYYY-MM-DD format
-    if ((dateParts[2].length === 4) || (dateParts[0].length === 1 && dateParts[1].length === 1)) {
-        dateParts = [dateParts[2], dateParts[1], dateParts[0]];
-    }
-    console.log(dateParts);
-
-    if (dateParts[0].length !== 4){
-        dateParts[0] = '20' + dateParts[0];
-    }
-    if (dateParts[1].length === 1){
-        dateParts[1] = '0' + dateParts[1];
-    }
-    if (dateParts[2].length === 1){
-        dateParts[2] = '0' + dateParts[2];
-    }
-    return `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}`;
-}
+import { normalizeDate } from '../components/utils';
 
 function BooksPage ({setBookToEdit}) {
     const [books, setBooks] = React.useState([]);
@@ -41,7 +17,8 @@ function BooksPage ({setBookToEdit}) {
             title,
             publication_date
         };
-
+        
+        // normalize date format
         newBook.publication_date = normalizeDate(newBook.publication_date);
 
         // check for empty fields
@@ -102,20 +79,35 @@ function BooksPage ({setBookToEdit}) {
             <h3>Books</h3>
             <br />
             <h5>Add Book</h5>
-            <input
-                className={emptyFields.includes('title') ? 'error' : 'bookField'}
-                type="text"
-                placeholder="title"
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-                />
-            <input
-                className={emptyFields.includes('publication_date') ? 'error' : 'bookField'}
-                type="text"
-                placeholder="publication_date"
-                value={publication_date}
-                onChange={e => setPublicationDate(e.target.value)}
-                />
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Publication Date</th>
+                    </tr>
+                </thead>
+                    <tr>
+                        <td>
+                            <input
+                                className={emptyFields.includes('title') ? 'error' : 'bookField'}
+                                type="text"
+                                placeholder="title"
+                                value={title}
+                                onChange={e => setTitle(e.target.value)}
+                                />
+                        </td>
+                        <td>
+                            <input
+                                className={emptyFields.includes('publication_date') ? 'error' : 'bookField'}
+                                type="date"
+                                placeholder="publication_date"
+                                value={publication_date}
+                                onChange={e => setPublicationDate(e.target.value)}
+                                />
+                        </td>
+                    </tr>
+            </table>
             <button className="button-medium"
                 onClick={addBook}
             >Add Book</button>
