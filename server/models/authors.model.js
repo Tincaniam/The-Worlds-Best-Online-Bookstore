@@ -7,15 +7,17 @@ class Author {
     }
     
     static create(newAuthor, result) {
-        db.query("INSERT INTO Authors SET ?", newAuthor, (err, res) => {
+        db.query(`INSERT INTO Authors (first_name, last_name)
+        VALUES ('${newAuthor.first_name}', '${newAuthor.last_name}');`,
+        (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null); // err is the error object, null is the result
                 return;
             }
             else {
-                console.log("created author: ", { id: res.insertId, ...newAuthor });
-                result(null, { id: res.insertId, ...newAuthor });
+                console.log("created author: ", { res });
+                result(null, { res });
             };
 
         });
@@ -54,8 +56,10 @@ class Author {
         });
     }
 
-    static updateByID(id, author, result) {
-        db.query("UPDATE Authors SET first_name = ?, last_name = ? WHERE author_id = ?", [author.first_name, author.last_name, id], (err, res) => {
+    static updateByID(authorID, author, result) {
+        //db.query("UPDATE Authors SET first_name = ?, last_name = ? WHERE author_id = ?", [author.first_name, author.last_name, id], (err, res) => {
+        db.query(`UPDATE Authors SET first_name = '${author.first_name}', last_name = '${author.last_name}' WHERE author_id = ${authorID};`,
+        (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);
@@ -67,14 +71,15 @@ class Author {
                 return;
             }
             else {
-                console.log("updated author: ", { id: id, ...author });
-                result(null, { id: id, ...author });
+                console.log("updated author: ", res);
+                result(null, { res });
             };
         });
     }
 
-    static deleteByID(id, result) {
-        db.query("DELETE FROM Authors WHERE author_id = ?", id, (err, res) => {
+    static deleteByID(authorID, result) {
+        db.query(`DELETE FROM Authors WHERE author_id = ${authorID}`,
+        (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);

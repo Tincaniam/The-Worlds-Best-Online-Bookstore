@@ -1,11 +1,5 @@
 "use strict";
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -27,19 +21,19 @@ function () {
   _createClass(Author, null, [{
     key: "create",
     value: function create(newAuthor, result) {
-      db.query("INSERT INTO Authors SET ?", newAuthor, function (err, res) {
+      db.query("INSERT INTO Authors (first_name, last_name)\n        VALUES ('".concat(newAuthor.first_name, "', '").concat(newAuthor.last_name, "');"), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null); // err is the error object, null is the result
 
           return;
         } else {
-          console.log("created author: ", _objectSpread({
-            id: res.insertId
-          }, newAuthor));
-          result(null, _objectSpread({
-            id: res.insertId
-          }, newAuthor));
+          console.log("created author: ", {
+            res: res
+          });
+          result(null, {
+            res: res
+          });
         }
 
         ;
@@ -85,8 +79,9 @@ function () {
     }
   }, {
     key: "updateByID",
-    value: function updateByID(id, author, result) {
-      db.query("UPDATE Authors SET first_name = ?, last_name = ? WHERE author_id = ?", [author.first_name, author.last_name, id], function (err, res) {
+    value: function updateByID(authorID, author, result) {
+      //db.query("UPDATE Authors SET first_name = ?, last_name = ? WHERE author_id = ?", [author.first_name, author.last_name, id], (err, res) => {
+      db.query("UPDATE Authors SET first_name = '".concat(author.first_name, "', last_name = '").concat(author.last_name, "' WHERE author_id = ").concat(authorID, ";"), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);
@@ -98,12 +93,10 @@ function () {
           }, null);
           return;
         } else {
-          console.log("updated author: ", _objectSpread({
-            id: id
-          }, author));
-          result(null, _objectSpread({
-            id: id
-          }, author));
+          console.log("updated author: ", res);
+          result(null, {
+            res: res
+          });
         }
 
         ;
@@ -111,8 +104,8 @@ function () {
     }
   }, {
     key: "deleteByID",
-    value: function deleteByID(id, result) {
-      db.query("DELETE FROM Authors WHERE author_id = ?", id, function (err, res) {
+    value: function deleteByID(authorID, result) {
+      db.query("DELETE FROM Authors WHERE author_id = ".concat(authorID), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);

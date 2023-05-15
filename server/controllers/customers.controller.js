@@ -28,7 +28,6 @@ getByID = (req, res) => {
 }
 
 create = (req, res) => {
-    console.log(req.body);
     if (!req.body) {
         res.status(400).send({message: "No content in request body."});
     };
@@ -36,8 +35,9 @@ create = (req, res) => {
     const newCustomer = new Customer({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        email: req.body.email,
-        phone: req.body.phone
+        address: req.body.address,
+        email_address: req.body.email_address,
+        phone_number: req.body.phone_number
         })
         console.log("newCustomer: ");
         console.log(newCustomer);
@@ -57,7 +57,7 @@ updateByID = (req, res) => {
         res.status(400).send({message: "Error: 400 Bad Request."});
     };
 
-    Customer.updateBYID(req.params.customerID, new Customer(req.body), (err, data) => {
+    Customer.updateByID(req.params.customerID, new Customer(req.body), (err, data) => {
         if (err) {
             if (err.kind == "not_found") {
                 res.status(404).send({message: "Customer with id " + req.params.customerID + " not found."});

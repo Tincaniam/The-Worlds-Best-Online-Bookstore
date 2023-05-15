@@ -39,8 +39,6 @@ getByID = function getByID(req, res) {
 };
 
 create = function create(req, res) {
-  console.log(req.body);
-
   if (!req.body) {
     res.status(400).send({
       message: "No content in request body."
@@ -51,8 +49,9 @@ create = function create(req, res) {
   var newCustomer = new Customer({
     first_name: req.body.first_name,
     last_name: req.body.last_name,
-    email: req.body.email,
-    phone: req.body.phone
+    address: req.body.address,
+    email_address: req.body.email_address,
+    phone_number: req.body.phone_number
   });
   console.log("newCustomer: ");
   console.log(newCustomer);
@@ -77,7 +76,7 @@ updateByID = function updateByID(req, res) {
   }
 
   ;
-  Customer.updateBYID(req.params.customerID, new Customer(req.body), function (err, data) {
+  Customer.updateByID(req.params.customerID, new Customer(req.body), function (err, data) {
     if (err) {
       if (err.kind == "not_found") {
         res.status(404).send({

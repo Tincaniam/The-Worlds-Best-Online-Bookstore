@@ -68,7 +68,7 @@ create = function create(req, res) {
   });
 };
 
-updateBYID = function updateBYID(req, res) {
+updateByID = function updateByID(req, res) {
   if (!req.body) {
     res.status(400).send({
       message: "Error: 400 Bad Request."
@@ -76,7 +76,7 @@ updateBYID = function updateBYID(req, res) {
   }
 
   ;
-  Book.updateBYID(req.params.bookID, new Book(req.body), function (err, data) {
+  Book.updateByID(req.params.bookID, new Book(req.body), function (err, data) {
     if (err) {
       if (err.kind == "not_found") {
         res.status(404).send({
@@ -125,6 +125,6 @@ module.exports = {
   getAll: getAll,
   getByID: getByID,
   create: create,
-  update: update,
+  updateByID: updateByID,
   deleteByID: deleteByID
 };

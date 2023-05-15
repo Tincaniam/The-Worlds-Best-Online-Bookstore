@@ -28,6 +28,10 @@ export const EditOrdersPage2 = () => {
     // Temp hardcoded discount_codes data for testing
     const discountCodes = [
         {
+            discount_code_id: 0,
+            discount_code_name: 'None'
+        },
+        {
             discount_code_id: 1,
             discount_code_name: '10OFF'
         },

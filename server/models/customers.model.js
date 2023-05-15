@@ -5,27 +5,29 @@ class Customer {
         this.first_name = customer.first_name;
         this.last_name = customer.last_name;
         this.address = customer.address;
-        this.email = customer.email;
-        this.phone = customer.phone;
+        this.email_address = customer.email_address;
+        this.phone_number = customer.phone_number;
     }
 
     static create(newCustomer, result) {
-        db.query("INSERT INTO Customers SET ?", newCustomer, (err, res) => {
+        db.query(`INSERT INTO Customers (first_name, last_name, address, email_address, phone_number)
+        VALUES ('${newCustomer.first_name}', '${newCustomer.last_name}', '${newCustomer.address}', '${newCustomer.email_address}', '${newCustomer.phone_number}');`,
+        (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null); // err is the error object, null is the result
                 return;
             }
             else {
-                console.log("created customer: ", { id: res.insertId, ...newCustomer });
-                result(null, { id: res.insertId, ...newCustomer });
+                console.log("created customer: ", { res });
+                result(null, { res });
             };
 
         });
     }
 
-    static getById(customerId, result) {
-        db.query(`SELECT * FROM Customers WHERE customer_id = ${customerId}`, (err, res) => {
+    static getById(customerID, result) {
+        db.query(`SELECT * FROM Customers WHERE customer_id = ${customerID}`, (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);
@@ -57,8 +59,10 @@ class Customer {
         });
     }
 
-    static updateByID(id, customer, result) {
-        db.query("UPDATE Customers SET first_name = ?, last_name = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zip_code = ? WHERE customer_id = ?", [customer.first_name, customer.last_name, customer.email, customer.phone, customer.address, customer.city, customer.state, customer.zip_code, id], (err, res) => {
+    static updateByID(customerID, customer, result) {
+        //db.query(`UPDATE Customers SET first_name = , last_name = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zip_code = ? WHERE customer_id = ?`,
+        db.query(`UPDATE Customers SET first_name = '${customer.first_name}', last_name = '${customer.last_name}', address = '${customer.address}', email_address = '${customer.email_address}', phone_number = '${customer.phone_number}' WHERE customer_id = ${customerID}`,
+        (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);
@@ -70,14 +74,15 @@ class Customer {
                 return;
             }
             else {
-                console.log("updated customer: ", { id: id, ...customer });
-                result(null, { id: id, ...customer });
+                console.log("updated customer: ", { res });
+                result(null, { res });
             }
         });
     }
 
-    static deleteByID(id, result) {
-        db.query("DELETE FROM Customers WHERE customer_id = ?", id, (err, res) => {
+    static deleteByID(customerID, result) {
+        db.query(`DELETE FROM Customers WHERE customer_id = ${customerID}`,
+        (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);
@@ -89,12 +94,11 @@ class Customer {
                 return;
             }
             else {
-                console.log("deleted customer with customer_id: ", id);
+                console.log("deleted customer with customer_id: ", customerID);
                 result(null, res);
             };
         });
     }
-    
 }
 
 module.exports = Customer;

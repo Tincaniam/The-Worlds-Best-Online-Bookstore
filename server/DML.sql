@@ -25,6 +25,7 @@ SELECT * FROM Customers;
 SELECT Orders.order_id, Orders.customer_id, CONCAT(Customers.first_name, " ", Customers.last_name) AS customer_name, Orders.order_date, Orders.order_total, Orders.discount_code_id, Discount_Codes.discount_code_name
 FROM Orders
 INNER JOIN Customers ON Orders.customer_id = Customers.customer_id
+
 -- Outer join in Discount_Codes table for discount code name if there is one
 LEFT OUTER JOIN Discount_Codes ON Orders.discount_code_id = Discount_Codes.discount_code_id;
 

@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
@@ -15,6 +15,10 @@ import BooksPage from './pages/BooksPage';
 import CustomersPage from './pages/CustomersPage';
 import BooksAuthorsPage from './pages/BooksAuthorsPage';
 import BooksOrdersPage from './pages/BooksOrdersPage';
+import EditBooksPage from './pages/EditBooksPage';
+import EditAuthorsPage from './pages/EditAuthorsPage';
+import EditCustomersPage from './pages/EditCustomersPage';
+import EditOrdersPage from './pages/EditOrdersPage';
 import EditAuthorsPage1 from './pages/EditAuthorsPage1';
 import EditAuthorsPage2 from './pages/EditAuthorsPage2';
 import EditAuthorsPage3 from './pages/EditAuthorsPage3';
@@ -32,7 +36,12 @@ import { Link } from 'react-router-dom';
 
 function App() {
 
-  //const [projectDBThing, setDBThing] = useState();
+  const [bookToEdit, setBookToEdit] = useState();
+  const [authorToEdit, setAuthorToEdit] = useState();
+  const [customerToEdit, setCustomerToEdit] = useState();
+  const [orderToEdit, setOrderToEdit] = useState();
+  const [booksAuthorsToEdit, setBooksAuthorsToEdit] = useState();
+  const [booksOrdersToEdit, setBooksOrdersToEdit] = useState();
 
   return (
 
@@ -165,25 +174,37 @@ function App() {
             <HomePage />
           </Route>
           <Route path="/books">
-            <BooksPage />
+            <BooksPage setBookToEdit={setBookToEdit}/>
           </Route>
           <Route path="/authors">
-            <AuthorsPage />
+            <AuthorsPage setAuthorToEdit={setAuthorToEdit}/>
           </Route>
           <Route path="/customers">
-            <CustomersPage />
+            <CustomersPage setCustomerToEdit={setCustomerToEdit}/>
           </Route>
           <Route path="/orders">
-            <OrdersPage />
+            <OrdersPage setOrderToEdit={setOrderToEdit}/>
           </Route>
           <Route path="/discount-codes">
             <DiscountCodesPage />
           </Route>
           <Route path="/books_authors">
-            <BooksAuthorsPage/>
+            <BooksAuthorsPage setBooksAuthorsToEdit={setBooksAuthorsToEdit}/>
           </Route>
           <Route path="/books_orders">
-            <BooksOrdersPage/>
+            <BooksOrdersPage setBooksOrdersToEdit={setBooksOrdersToEdit}/>
+          </Route>
+          <Route path="/edit-books">
+            <EditBooksPage bookToEdit={bookToEdit}/>
+          </Route>
+          <Route path="/edit-authors">
+            <EditAuthorsPage authorToEdit={authorToEdit}/>
+          </Route>
+          <Route path="/edit-customers">
+            <EditCustomersPage customerToEdit={customerToEdit}/>
+          </Route>
+          <Route path="/edit-orders">
+            <EditOrdersPage orderToEdit={orderToEdit}/>
           </Route>
           <Route path="/edit-books1">
             <EditBooksPage1 />

@@ -1,25 +1,79 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
+import AuthorsTable from '../components/AuthorsTable';
 
-export const AuthorsPage = () => {
+function AuthorsPage ({setAuthorToEdit}) {
+    const [authors, setAuthors] = React.useState([]);
+    const history = useHistory();
 
-    let history = useHistory();
+    // author states
+    const [first_name, setFirstName] = useState('');
+    const [last_name, setLastName] = useState('');
+    const [emptyFields, setEmptyFields] = useState([]);
 
-    const editAuthors1 = () => {
-        history.push('/edit-authors1');
+    const addAuthor = async () => {
+        const newAuthor = {
+            first_name,
+            last_name
+        };
+
+        // check for empty fields
+        const emptyFields = [];
+        if (!newAuthor.first_name) emptyFields.push('first_name');
+        if (!newAuthor.last_name) emptyFields.push('last_name');
+
+        if (emptyFields.length) {
+            setEmptyFields(emptyFields);
+            return;
+        }
+        
+        const response = await fetch('/api/authors', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newAuthor)
+        });
+        
+        if (!response.ok) {
+            const json = await response.json();
+            alert(json.error);
+            setEmptyFields(json.emptyFields);
+        }
+        else {
+            alert("Author added!")
+            fetchAuthors();
+        }
     }
 
-    const editAuthors2 = () => {
-        history.push('/edit-authors2');
+    const editAuthor = author => {
+        setAuthorToEdit(author);
+        history.push('/edit-authors');
     }
 
-    const editAuthors3 = () => {
-        history.push('/edit-authors3');
+    const deleteAuthor = async author_id => {
+        const response = await fetch(`/api/authors/${author_id}`, {
+            method: 'DELETE'
+        });
+
+        if (response.ok) {
+            setAuthors(authors.filter(author => author.author_id !== author_id));
+        }
+        else {
+            console.log('error');
+        }
+    };
+
+    const fetchAuthors = async () => {
+        const response = await fetch('/api/authors');
+        const json = await response.json();
+        setAuthors(json);
     }
 
-    const editAuthors4 = () => {
-        history.push('/edit-authors4');
+    React.useEffect(() => {
+        fetchAuthors();
     }
+    , []);
 
     return (
         <div>
@@ -27,68 +81,28 @@ export const AuthorsPage = () => {
             <br />
             <h5>Add Author</h5>
             <input
-                className='form-control'
+                className={emptyFields.includes('first_name') ? 'error' : 'authorField'}
                 type="text"
                 placeholder="first_name"
-                />
+                value={first_name}
+                onChange={e => setFirstName(e.target.value)}
+            />
             <input
-                className='form-control'
+                className={emptyFields.includes('last_name') ? 'error' : 'authorField'}
                 type="text"
                 placeholder="last_name"
-                />
-            <button className="button-medium">Add Author</button>
+                value={last_name}
+                onChange={e => setLastName(e.target.value)}
+            />
+            <button className="button-medium" onClick={addAuthor}
+            >Add Author</button>
 
-            <br /><br />
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th>author_id</th>
-                        <th>first_name</th>
-                        <th>last_name</th>
-                        <th>actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Leo</td>
-                        <td>Tolstoy</td>
-                        <td>
-                            <button className="btn btn-outline-primary" onClick={editAuthors1}>Edit</button>
-                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Terry</td>
-                        <td>Pratchett</td>
-                        <td>
-                            <button className="btn btn-outline-primary" onClick={editAuthors2}>Edit</button>
-                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Neil</td>
-                        <td>Gaiman</td>
-                        <td>
-                            <button className="btn btn-outline-primary" onClick={editAuthors3}>Edit</button>
-                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Harper</td>
-                        <td>Lee</td>
-                        <td>
-                            <button className="btn btn-outline-primary" onClick={editAuthors4}>Edit</button>
-                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <br></br>
+            <br></br>
+            <AuthorsTable authors={authors} editAuthor={editAuthor} deleteAuthor={deleteAuthor} />
         </div>
     );
+
 }
 
 export default AuthorsPage;
