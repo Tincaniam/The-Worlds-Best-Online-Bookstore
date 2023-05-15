@@ -4,6 +4,8 @@ World's Best Online Bookstore
 
 Is a full stack website with a Node Express server attached to a MySQL instance and a React front end.
 
+By default, the server runs on port 4000 and the client runs on port 3000. You can run both simultaneously on your local machine for development by running the following commands on two different terminal instances.
+
 Server
 
 To install and run the server, clone the repository. In the "server" directory, run:
@@ -22,4 +24,4 @@ To install and run the client, clone the repository. In the "client" directory, 
 
 Then run:
 
-`nopm start`
+`npm start`
