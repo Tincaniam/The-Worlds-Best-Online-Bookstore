@@ -107,7 +107,7 @@ export const EditOrdersPage = ({orderToEdit}) => {
                         <td>
                             <select
                                 className={emptyFields.includes("discount_code_id") ? "error" : "orderField"}
-                                value = {discount_code_name}
+                                value = {discount_code_id}
                                 onChange={e => setDiscountCodeId(e.target.value)}
                                 >
                                 <option value="">Select a discount code</option>
