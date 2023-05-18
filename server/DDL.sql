@@ -45,7 +45,7 @@ CREATE OR REPLACE TABLE Books_Authors (
   CONSTRAINT `fk_books_has_authors_authors1`
     FOREIGN KEY (`author_id`)
     REFERENCES `Authors` (`author_id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -116,7 +116,7 @@ CREATE OR REPLACE TABLE Books_Orders (
   CONSTRAINT `fk_books_has_orders_orders1`
     FOREIGN KEY (`order_id`)
     REFERENCES `Orders` (`order_id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
