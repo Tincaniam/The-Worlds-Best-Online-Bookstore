@@ -30,6 +30,14 @@ h3 {
   padding: 1px;
 }
 
+/*
+Code Citation
+
+Table formatting css was adapted from examples at:
+
+https://www.w3schools.com/css/css_table.asp
+
+*/
 table {
   margin-left: auto;
   margin-right: auto;
@@ -66,10 +74,6 @@ fieldset {
 .form-control {
   font-size: large !important;
   margin-left: auto;
-}
-
-.advLabel {
-  color:#0470AA !important
 }
 
 legend {

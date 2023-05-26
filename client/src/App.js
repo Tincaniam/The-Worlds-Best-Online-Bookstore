@@ -19,19 +19,6 @@ import EditBooksPage from './pages/EditBooksPage';
 import EditAuthorsPage from './pages/EditAuthorsPage';
 import EditCustomersPage from './pages/EditCustomersPage';
 import EditOrdersPage from './pages/EditOrdersPage';
-import EditAuthorsPage1 from './pages/EditAuthorsPage1';
-import EditAuthorsPage2 from './pages/EditAuthorsPage2';
-import EditAuthorsPage3 from './pages/EditAuthorsPage3';
-import EditAuthorsPage4 from './pages/EditAuthorsPage4';
-import EditOrdersPage1 from './pages/EditOrdersPage1';
-import EditOrdersPage2 from './pages/EditOrdersPage2';
-import EditOrdersPage3 from './pages/EditOrdersPage3';
-import EditBooksPage1 from './pages/EditBooksPage1';
-import EditBooksPage2 from './pages/EditBooksPage2';
-import EditBooksPage3 from './pages/EditBooksPage3';
-import EditCustomersPage1 from './pages/EditCustomersPage1';
-import EditCustomersPage2 from './pages/EditCustomersPage2';
-import EditCustomersPage3 from './pages/EditCustomersPage3';
 import { Link } from 'react-router-dom';
 
 function App() {
@@ -40,8 +27,6 @@ function App() {
   const [authorToEdit, setAuthorToEdit] = useState();
   const [customerToEdit, setCustomerToEdit] = useState();
   const [orderToEdit, setOrderToEdit] = useState();
-  const [booksAuthorsToEdit, setBooksAuthorsToEdit] = useState();
-  const [booksOrdersToEdit, setBooksOrdersToEdit] = useState();
 
   return (
 
@@ -189,10 +174,10 @@ function App() {
             <DiscountCodesPage />
           </Route>
           <Route path="/books_authors">
-            <BooksAuthorsPage setBooksAuthorsToEdit={setBooksAuthorsToEdit}/>
+            <BooksAuthorsPage />
           </Route>
           <Route path="/books_orders">
-            <BooksOrdersPage setBooksOrdersToEdit={setBooksOrdersToEdit}/>
+            <BooksOrdersPage />
           </Route>
           <Route path="/edit-books">
             <EditBooksPage bookToEdit={bookToEdit}/>
@@ -205,45 +190,6 @@ function App() {
           </Route>
           <Route path="/edit-orders">
             <EditOrdersPage orderToEdit={orderToEdit}/>
-          </Route>
-          <Route path="/edit-books1">
-            <EditBooksPage1 />
-          </Route>
-          <Route path="/edit-books2">
-            <EditBooksPage2 />
-          </Route>
-          <Route path="/edit-books3">
-            <EditBooksPage3 />
-          </Route>
-          <Route path="/edit-authors1">
-            <EditAuthorsPage1 />
-          </Route>
-          <Route path="/edit-authors2">
-            <EditAuthorsPage2 />
-          </Route>
-          <Route path="/edit-authors3">
-            <EditAuthorsPage3 />
-          </Route>
-          <Route path="/edit-authors4">
-            <EditAuthorsPage4 />
-          </Route>
-          <Route path="/edit-customers1">
-            <EditCustomersPage1 />
-          </Route>
-          <Route path="/edit-customers2">
-            <EditCustomersPage2 />
-          </Route>
-          <Route path="/edit-customers3">
-            <EditCustomersPage3 />
-          </Route>
-          <Route path="/edit-orders1">
-            <EditOrdersPage1 />
-          </Route>
-          <Route path="/edit-orders2">
-            <EditOrdersPage2 />
-          </Route>
-          <Route path="/edit-orders3">
-            <EditOrdersPage3 />
           </Route>
           </div>
           <br></br>
