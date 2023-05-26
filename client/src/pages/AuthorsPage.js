@@ -80,20 +80,37 @@ function AuthorsPage ({setAuthorToEdit}) {
             <h3>Authors</h3>
             <br />
             <h5>Add Author</h5>
-            <input
-                className={emptyFields.includes('first_name') ? 'error' : 'authorField'}
-                type="text"
-                placeholder="first_name"
-                value={first_name}
-                onChange={e => setFirstName(e.target.value)}
-            />
-            <input
-                className={emptyFields.includes('last_name') ? 'error' : 'authorField'}
-                type="text"
-                placeholder="last_name"
-                value={last_name}
-                onChange={e => setLastName(e.target.value)}
-            />
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>first_name</th>
+                        <th>last_name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input
+                                className={emptyFields.includes('first_name') ? 'error' : 'authorField'}
+                                type="text"
+                                placeholder="first_name"
+                                value={first_name}
+                                onChange={e => setFirstName(e.target.value)}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                className={emptyFields.includes('last_name') ? 'error' : 'authorField'}
+                                type="text"
+                                placeholder="last_name"
+                                value={last_name}
+                                onChange={e => setLastName(e.target.value)}
+                            />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <button className="button-medium" onClick={addAuthor}
             >Add Author</button>
 

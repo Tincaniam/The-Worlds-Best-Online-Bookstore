@@ -83,10 +83,11 @@ function BooksPage ({setBookToEdit}) {
             <table>
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Publication Date</th>
+                        <th>title</th>
+                        <th>publication_date</th>
                     </tr>
                 </thead>
+                <tbody>
                     <tr>
                         <td>
                             <input
@@ -107,6 +108,7 @@ function BooksPage ({setBookToEdit}) {
                                 />
                         </td>
                     </tr>
+                </tbody>
             </table>
             <button className="button-medium"
                 onClick={addBook}

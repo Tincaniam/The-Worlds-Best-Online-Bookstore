@@ -113,7 +113,7 @@ function OrdersPage ({setOrderToEdit}) {
 
     return (
         <div>
-            <h1>Orders</h1>
+            <h3>Orders</h3>
             <br />
             <h5>Add Order</h5>
             <table>

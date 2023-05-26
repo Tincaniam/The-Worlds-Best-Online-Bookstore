@@ -88,41 +88,68 @@ function CustomersPage ({setCustomerToEdit}) {
             <h3>Customers</h3>
             <br />
             <h5>Add Customer</h5>
-            <input
-                className={emptyFields.includes('title') ? 'error' : 'customerField'}
-                type="text"
-                placeholder="first_name"
-                value={first_name}
-                onChange={e => setFirstName(e.target.value)}
-                />
-            <input
-                className={emptyFields.includes('title') ? 'error' : 'customerField'}
-                type="text"
-                placeholder="last_name"
-                value={last_name}
-                onChange={e => setLastName(e.target.value)}
-                />
-            <input
-                className={emptyFields.includes('title') ? 'error' : 'customerField'}
-                type="text"
-                placeholder="address"
-                value={address}
-                onChange={e => setAddress(e.target.value)}
-                />
-            <input
-                className={emptyFields.includes('title') ? 'error' : 'customerField'}
-                type="text"
-                placeholder="email_address"
-                value={email_address}
-                onChange={e => setEmailAddress(e.target.value)}
-                />
-            <input
-                className={emptyFields.includes('title') ? 'error' : 'customerField'}
-                type="text"
-                placeholder="phone_number"
-                value={phone_number}
-                onChange={e => setPhoneNumber(e.target.value)}
-                />
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>first_name</th>
+                        <th>last_name</th>
+                        <th>address</th>
+                        <th>email_address</th>
+                        <th>phone_number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input
+                                className={emptyFields.includes('first_name') ? 'error' : 'customerField'}
+                                type="text"
+                                placeholder="first_name"
+                                value={first_name}
+                                onChange={e => setFirstName(e.target.value)}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                className={emptyFields.includes('last_name') ? 'error' : 'customerField'}
+                                type="text"
+                                placeholder="last_name"
+                                value={last_name}
+                                onChange={e => setLastName(e.target.value)}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                className={emptyFields.includes('address') ? 'error' : 'customerField'}
+                                type="text"
+                                placeholder="address"
+                                value={address}
+                                onChange={e => setAddress(e.target.value)}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                className={emptyFields.includes('email_address') ? 'error' : 'customerField'}
+                                type="text"
+                                placeholder="email_address"
+                                value={email_address}
+                                onChange={e => setEmailAddress(e.target.value)}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                className={emptyFields.includes('phone_number') ? 'error' : 'customerField'}
+                                type="text"
+                                placeholder="phone_number"
+                                value={phone_number}
+                                onChange={e => setPhoneNumber(e.target.value)}
+                            />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
             <button className="button-medium"
                 onClick={addCustomer}
             >Add Customer</button>
