@@ -125,42 +125,47 @@ function OrdersPage ({setOrderToEdit}) {
                         <th>Discount Code</th>
                     </tr>
                 </thead>
-            <td>
-                <select
-                    className={emptyFields.includes('customer_id') ? 'error' : 'orderField'}
-                    onChange={e => setCustomerId(e.target.value)}>
-                    <option value="">Select Customer</option>
-                    {customers.map(customer => (
-                        <option key={customer.customer_id} value={customer.customer_id}>{customer.first_name} {customer.last_name}</option>
-                    ))}
-                </select>
-            </td>
-            <td>
-                <input 
-                    className={emptyFields.includes('order_date') ? 'error' : 'orderField'}
-                    type="date"
-                    value={order_date}
-                    onChange={e => setOrderDate(e.target.value)}
-                    />
-            </td>
-            <td>
-                <input
-                    className={emptyFields.includes('order_total') ? 'error' : 'orderField'}
-                    type="number"
-                    value={order_total}
-                    onChange={e => setOrderTotal(e.target.value)}
-                    />
-            </td>
-            <td>
-                <select
-                    className={emptyFields.includes('discount_code_id') ? 'error' : 'orderField'}
-                    onChange={e => setDiscountCodeId(e.target.value)}>
-                    {discountCodes.map(discountCode => (
-                        <option key={discountCode.discount_code_id} value={discountCode.discount_code_id}>{discountCode.discount_code_name}</option>
-                    ))}
-                </select>
-            </td>
-        </table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <select
+                                className={emptyFields.includes('customer_id') ? 'error' : 'orderField'}
+                                onChange={e => setCustomerId(e.target.value)}>
+                                <option value="">Select Customer</option>
+                                {customers.map(customer => (
+                                    <option key={customer.customer_id} value={customer.customer_id}>{customer.first_name} {customer.last_name}</option>
+                                ))}
+                            </select>
+                        </td>
+                        <td>
+                            <input 
+                                className={emptyFields.includes('order_date') ? 'error' : 'orderField'}
+                                type="date"
+                                value={order_date}
+                                onChange={e => setOrderDate(e.target.value)}
+                                />
+                        </td>
+                        <td>
+                            <input
+                                className={emptyFields.includes('order_total') ? 'error' : 'orderField'}
+                                type="number"
+                                value={order_total}
+                                onChange={e => setOrderTotal(e.target.value)}
+                                />
+                        </td>
+                        <td>
+                            <select
+                                className={emptyFields.includes('discount_code_id') ? 'error' : 'orderField'}
+                                onChange={e => setDiscountCodeId(e.target.value)}>
+                                <option value="">Select Discount Code</option>
+                                {discountCodes.map(discountCode => (
+                                    <option key={discountCode.discount_code_id} value={discountCode.discount_code_id}>{discountCode.discount_code_name}</option>
+                                ))}
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <button className="button-medium"
                 onClick={addOrder}
             >Add Order</button>

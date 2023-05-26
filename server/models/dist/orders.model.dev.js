@@ -71,8 +71,8 @@ function () {
       });
     }
   }, {
-    key: "getById",
-    value: function getById(orderID, result) {
+    key: "getByID",
+    value: function getByID(orderID, result) {
       db.query("SELECT * FROM Orders WHERE order_id = ".concat(orderID), function (err, res) {
         if (err) {
           console.log("error: ", err);
@@ -109,8 +109,8 @@ function () {
       });
     }
   }, {
-    key: "updateById",
-    value: function updateById(orderID, order, result) {
+    key: "updateByID",
+    value: function updateByID(orderID, order, result) {
       db.query("UPDATE Orders SET customer_id = '".concat(order.customer_id, "', order_date = '").concat(order.order_date, "', order_total = '").concat(order.order_total, "', discount_code_id = '").concat(order.discount_code_id, "' WHERE order_id = ").concat(orderID), function (err, res) {
         if (err) {
           console.log("error: ", err);

@@ -46,7 +46,7 @@ export const EditBooksPage = ({bookToEdit}) => {
                 />
             <input
                 className={emptyFields.includes("publication_date") ? "error" : "bookField"}
-                type="date"
+                type="text"
                 value = {publication_date}
                 onChange={e => setPublicationDate(e.target.value)}
                 />

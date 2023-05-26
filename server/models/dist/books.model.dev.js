@@ -80,7 +80,6 @@ function () {
   }, {
     key: "updateByID",
     value: function updateByID(bookID, book, result) {
-      //db.query("UPDATE Books SET title = ?, publication_date = ? WHERE book_id = ?", [book.title, book.publication_date, id], (err, res) => {
       db.query("UPDATE Books SET title = '".concat(book.title, "', publication_date = '").concat(book.publication_date, "' WHERE book_id = ").concat(bookID), function (err, res) {
         if (err) {
           console.log("error: ", err);

@@ -54,7 +54,6 @@ class Book {
     }
     static updateByID(bookID, book, result) {
 
-        //db.query("UPDATE Books SET title = ?, publication_date = ? WHERE book_id = ?", [book.title, book.publication_date, id], (err, res) => {
         db.query(`UPDATE Books SET title = '${book.title}', publication_date = '${book.publication_date}' WHERE book_id = ${bookID}`,
         (err, res) => {
             if (err) {

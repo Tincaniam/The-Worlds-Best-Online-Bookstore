@@ -53,7 +53,7 @@ class Order {
         });
     }
 
-    static getById(orderID, result) {
+    static getByID(orderID, result) {
         db.query(`SELECT * FROM Orders WHERE order_id = ${orderID}`, (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -87,7 +87,7 @@ class Order {
         });
     }
 
-    static updateById(orderID, order, result) {
+    static updateByID(orderID, order, result) {
         db.query(`UPDATE Orders SET customer_id = '${order.customer_id}', order_date = '${order.order_date}', order_total = '${order.order_total}', discount_code_id = '${order.discount_code_id}' WHERE order_id = ${orderID}`,
         (err, res) => {
             if (err) {

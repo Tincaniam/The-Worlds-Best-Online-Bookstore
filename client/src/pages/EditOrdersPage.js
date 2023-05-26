@@ -3,14 +3,15 @@ import { useHistory } from 'react-router-dom';
 
 export const EditOrdersPage = ({orderToEdit}) => {
 
-    const [customers, setCustomers] = useState([]);
-    const [discountCodes, setDiscountCodes] = useState([]);
+    const [customers, setCustomers] = useState([]);  // for dropdown
+    const [discountCodes, setDiscountCodes] = useState([]);  // for dropdown
 
     // order states
     const [customer_id, setCustomerId] = useState(orderToEdit.customer_id);
     const [order_date, setOrderDate] = useState(orderToEdit.order_date);
     const [order_total, setOrderTotal] = useState(orderToEdit.order_total);
     const [discount_code_id, setDiscountCodeId] = useState(orderToEdit.discount_code_id);
+    const [discount_code_name, setDiscountCodeName] = useState(orderToEdit.discount_code_name);
     const [emptyFields, setEmptyFields] = useState([]);
 
     let history = useHistory();
@@ -40,25 +41,35 @@ export const EditOrdersPage = ({orderToEdit}) => {
     };
 
     React.useEffect(() => {
+
+        // Get customers for dropdown
+        const fetchCustomers = async () => {
+            const response = await fetch('/api/customers');
+            if (response.ok) {
+                const json = await response.json();
+                console.log(json);
+                setCustomers(json);
+            }
+        };
+
         fetchCustomers();
+    
+        // Get discount codes for dropdown
+        const fetchDiscountCodes = async () => {
+            const response = await fetch('/api/discount_codes');
+            if (response.ok) {
+                const json = await response.json();
+                console.log(json);
+    
+                // Add empty option
+                json.unshift({discount_code_id: '', discount_code_name: ''});
+                setDiscountCodes(json);
+            }
+        };
+
         fetchDiscountCodes();
     }
     , []);
-
-    const fetchCustomers = async () => {
-        const response = await fetch('/api/customers');
-        const json = await response.json();
-        setCustomers(json);
-    }
-
-    const fetchDiscountCodes = async () => {
-        const response = await fetch('/api/discount_codes');
-        const json = await response.json();
-
-        // Add empty option
-        json.unshift({discount_code_id: "", discount_code_name: ""});
-        setDiscountCodes(json);
-    }
 
     return (
         <div>
@@ -91,7 +102,7 @@ export const EditOrdersPage = ({orderToEdit}) => {
                         <td>
                             <input
                                 className={emptyFields.includes("order_date") ? "error" : "orderField"}
-                                type="date"
+                                type="text"
                                 value = {order_date}
                                 onChange={e => setOrderDate(e.target.value)}
                                 />
@@ -110,10 +121,9 @@ export const EditOrdersPage = ({orderToEdit}) => {
                                 value = {discount_code_id}
                                 onChange={e => setDiscountCodeId(e.target.value)}
                                 >
-                                <option value="">Select a discount code</option>
 
                                 {discountCodes.map(discountCode => (
-                                    <option key={discountCode.discount_code_id} value={discountCode.discount_code_id}>{discountCode.discount_code}</option>
+                                    <option key={discountCode.discount_code_id} value={discountCode.discount_code_id}>{discountCode.discount_code_name}</option>
                                 ))}
                             </select>
                         </td>
