@@ -40,9 +40,9 @@ function () {
       });
     }
   }, {
-    key: "getById",
-    value: function getById(bookId, result) {
-      db.query("SELECT * FROM Books WHERE book_id = ".concat(bookId), function (err, res) {
+    key: "getByID",
+    value: function getByID(bookID, result) {
+      db.query("SELECT * FROM Books WHERE book_id = ".concat(bookID), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);

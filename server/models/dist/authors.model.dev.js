@@ -40,9 +40,9 @@ function () {
       });
     }
   }, {
-    key: "getById",
-    value: function getById(authorId, result) {
-      db.query("SELECT * FROM Authors WHERE author_id = ".concat(authorId), function (err, res) {
+    key: "getByID",
+    value: function getByID(authorID, result) {
+      db.query("SELECT * FROM Authors WHERE author_id = ".concat(authorID), function (err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);
@@ -117,7 +117,7 @@ function () {
           }, null);
           return;
         } else {
-          console.log("deleted Author with author_id: ", id);
+          console.log("deleted Author with author_id: ", authorID);
           result(null, res);
         }
 

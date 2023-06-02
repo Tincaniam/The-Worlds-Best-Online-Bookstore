@@ -21,8 +21,8 @@ class Book {
 
         });
     }
-    static getById(bookId, result) {
-        db.query(`SELECT * FROM Books WHERE book_id = ${bookId}`, (err, res) => {
+    static getByID(bookID, result) {
+        db.query(`SELECT * FROM Books WHERE book_id = ${bookID}`, (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);

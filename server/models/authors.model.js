@@ -23,8 +23,8 @@ class Author {
         });
     }
 
-    static getById(authorId, result) {
-        db.query(`SELECT * FROM Authors WHERE author_id = ${authorId}`, (err, res) => {
+    static getByID(authorID, result) {
+        db.query(`SELECT * FROM Authors WHERE author_id = ${authorID}`, (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);
@@ -91,7 +91,7 @@ class Author {
                 return;
             }
             else {
-                console.log("deleted Author with author_id: ", id);
+                console.log("deleted Author with author_id: ", authorID);
                 result(null, res);
             };
         });
