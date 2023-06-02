@@ -1,5 +1,15 @@
 "use strict";
 
+/*
+Citations:
+    Server code looesely adapted from the "nodejs-starter-app" from CS 340 at Oregon State University.
+    Date: 2023-04-05
+    https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
+    Other adaptions from "Exploration — Implementing a Full-Stack MERN App - Part 1" from CS 290 at Oregon State University.
+    Date: 2020-04-05
+    https://canvas.oregonstate.edu/courses/1869985/pages/exploration-implementing-a-full-stack-mern-app-part-1?module_item_id=22110234
+*/
 var express = require('express');
 
 var app = express();
@@ -21,10 +31,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 })); // Routes
+// Index route
 
-app.get('/', function (req, res) {
-  res.send('Home route!');
-});
+app.get('/', function (res) {
+  res.send('index');
+}); // Custom routes
+
 app.use('/api/books', booksRoutes);
 app.use('/api/authors', authorsRoutes);
 app.use('/api/customers', customersRoutes);

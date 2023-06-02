@@ -6,6 +6,14 @@ Object.defineProperty(exports, "__esModule", {
 exports.normalizeDate = normalizeDate;
 
 // Desc: Helper functions for the client side
+
+/*
+Citation:
+    Function adapted from:
+    "How to validate date with format mm/dd/yyyy in JavaScript?"
+    https://stackoverflow.com/questions/6177975/how-to-validate-date-with-format-mm-dd-yyyy-in-javascript
+    04-23-23
+*/
 // helper function to normalize date format
 function normalizeDate(date) {
   var dateParts = date.split(/[-/\.]/);

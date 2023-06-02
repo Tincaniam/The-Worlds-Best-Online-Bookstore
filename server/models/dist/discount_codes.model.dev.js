@@ -6,6 +6,13 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+/*
+Citations:
+    Project server code (primarily the codebase organizaiton) adapted from:
+    "Create CRUD APIs in NodeJS, Express and MySQL"
+    Date: 2023-04-05
+    https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
+*/
 var db = require("../db-connector.js");
 
 var _require = require("./books.model.js"),

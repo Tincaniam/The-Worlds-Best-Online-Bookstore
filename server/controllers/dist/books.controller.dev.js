@@ -1,5 +1,12 @@
 "use strict";
 
+/*
+Citations:
+    Project server code (primarily the codebase organizaiton) adapted from:
+    "Create CRUD APIs in NodeJS, Express and MySQL"
+    Date: 2023-04-05
+    https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
+*/
 var Book = require("../models/books.model.js");
 
 getAll = function getAll(req, res) {
