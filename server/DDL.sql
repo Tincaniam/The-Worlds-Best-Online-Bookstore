@@ -79,7 +79,7 @@ CREATE OR REPLACE TABLE `Orders` (
   CONSTRAINT `fk_orders_customers1`
     FOREIGN KEY (`customer_id`)
     REFERENCES `Customers` (`customer_id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Orders_Discount_Codes1`
     FOREIGN KEY (`discount_code_id`)
