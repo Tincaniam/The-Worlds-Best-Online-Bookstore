@@ -81,3 +81,53 @@ PUT http://localhost:4000/api/orders/29 HTTP/1.1
     "order_date": "2020-01-01",
     "order_total": 200.00
 }
+
+### Get all Books_Authors
+GET http://localhost:4000/api/books_authors HTTP/1.1
+
+### Create a Books_Authors
+POST http://localhost:4000/api/books_authors HTTP/1.1
+content-type: application/json
+
+{
+    "book_id": 1,
+    "author_id": 3
+}
+
+### Update Books_Authors By ID
+PUT http://localhost:4000/api/books_authors/1/2 HTTP/1.1
+content-type: application/json
+
+{
+    "book_id": 1,
+    "author_id": 3
+}
+
+### Delete Books_Authors By ID
+DELETE http://localhost:4000/api/books_authors/1/3 HTTP/1.1
+
+### Get all Books_Orders
+GET http://localhost:4000/api/books_orders HTTP/1.1
+
+### Create a Books_Orders
+POST http://localhost:4000/api/books_orders HTTP/1.1
+content-type: application/json
+
+{
+    "book_id": 3,
+    "order_id": 3
+}
+
+## Get all Discount_Codes
+GET http://localhost:4000/api/discount_codes HTTP/1.1
+
+
+### Create a Discount_Code
+POST http://localhost:4000/api/discount_codes HTTP/1.1
+content-type: application/json
+
+{
+    "discount_code_name": "40OFF"
+}
+
+

@@ -5,85 +5,111 @@ Citations:
     https://canvas.oregonstate.edu/courses/1869985/pages/exploration-implementing-a-full-stack-mern-app-part-1?module_item_id=22110234
 */
 
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import BooksOrdersTable from '../components/BooksOrdersTable';
 
-export const BooksOrdersPage = () => {
+function BooksOrdersPage () {
+    const [books_orders, setBooksOrders] = useState([]);
+    const history = useHistory();
 
-    // temp books hardcoded for testing
-    const books = [
-        { book_id: 1, title: 'War and Peace' },
-        { book_id: 2, title: 'Good Omens' },
-        { book_id: 3, title: 'To Kill a Mockingbird' }
-    ];
+    const [books, setBooks] = useState([]); // for dropdown
+    const [orders, setOrders] = useState([]); // for dropdown
 
-    // temp orders hardcoded for testing
-    const orders = [
-        { order_id: 1, order_date: '2020-01-01' },
-        { order_id: 2, order_date: '2020-02-02' },
-        { order_id: 3, order_date: '2020-03-03' }
-    ];
+    // books_orders states
+    const [book_id, setBookId] = useState('');
+    const [book_title, setBookTitle] = useState('');
+    const [order_id, setOrderId] = useState('');
+    const [order_date, setOrderDate] = useState('');
+    const [order_total, setOrderTotal] = useState('');
+
+    const addBookOrder = async () => {
+        const newBookOrder = { book_id, order_id };
+
+        const response = await fetch('/api/books_orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newBookOrder)
+        });
+
+        if (!response.ok) {
+            const json = await response.json();
+            alert(json.error);
+        }
+        else {
+            alert("Book_Order added");
+            fetchBooksOrders();
+        }
+    }
+
+    const fetchBooksOrders = async () => {
+        const response = await fetch('/api/books_orders');
+        const json = await response.json();
+        setBooksOrders(json);
+    }
+
+    React.useEffect(() => {
+        fetchBooksOrders();
+
+        // fetch books for dropdown
+        const fetchBooks = async () => {
+            const response = await fetch('/api/books');
+            const json = await response.json();
+            setBooks(json);
+        }
+
+        // fetch orders for dropdown
+        const fetchOrders = async () => {
+            const response = await fetch('/api/orders');
+            const json = await response.json();
+            setOrders(json);
+        }
+
+        fetchBooks();
+        fetchOrders();
+    }, []);
 
     return (
         <div>
             <h3>Books_Orders</h3>
             <br />
-            <h5>Add Books_Orders relationship</h5>
-            <select className='form-control'>
-                {books.map(book => (
-                    <option key={book.book_id} value={book.book_id}>{book.title}</option>
-                ))}
-            </select>
-            <select className='form-control'>
-                {orders.map(order => (
-                    <option key={order.order_id} value={order.order_id}>{order.order_id}</option>
-                ))}
-
-            </select>
-
-            <button className="button-medium">Add Books_Orders relationship</button>
-
-            <br /><br />
-            <table className="table table-striped">
+            <h5>Add Book_Order</h5>
+            <table>
                 <thead>
                     <tr>
-                        <th>book_id</th>
-                        <th>order_id</th>
-                        <th>actions</th>
+                        <th>Book</th>
+                        <th>Order</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>1</td>
                         <td>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <select value={book_id} onChange={e => setBookId(e.target.value)}>
+                                <option value="">Select Book</option>
+                                {books.map(book => (
+                                    <option key={book.book_id} value={book.book_id}>{book.title}</option>
+                                ))}
+                            </select>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
                         <td>
-                            <button className="btn btn-outline-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>
-                            <button className="btn btn-outline-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>2</td>
-                        <td>
-                            <button className="btn btn-outline-danger">Delete</button>
+                            <select value={order_id} onChange={e => setOrderId(e.target.value)}>
+                                <option value="">Select Order</option>
+                                {orders.map(order => (
+                                    <option key={order.order_id} value={order.order_id}>{order.order_id}</option>
+                                ))}
+                            </select>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <button onClick={addBookOrder}>Add Book_Order</button>
+            <br />
+
+            <BooksOrdersTable books_orders={books_orders} />
         </div>
-    );
+    )
 }
 
 export default BooksOrdersPage;

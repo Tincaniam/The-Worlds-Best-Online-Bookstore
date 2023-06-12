@@ -33,7 +33,7 @@ LEFT OUTER JOIN Discount_Codes ON Orders.discount_code_id = Discount_Codes.disco
 SELECT * FROM Discount_Codes;
 
 -- Books_Authors SELECT, include joins in drop down for ease of use
-SELECT Books.title AS book_title, CONCAT(Authors.first_name, " ", Authors.last_name) AS author_name
+SELECT Books.book_id, Books.title AS book_title, Authors.author_id, CONCAT(Authors.first_name, " ", Authors.last_name) AS author_name
 FROM Books_Authors
 INNER JOIN Books ON Books_Authors.book_id = Books.book_id
 INNER JOIN Authors ON Books_Authors.author_id = Authors.author_id;
@@ -192,7 +192,7 @@ WHERE author_id = :authorID;
 
 -- Also delete from Books_Authors when deleting from Authors
 DELETE FROM Books_Authors
-WHERE author_id = :authorID;
+WHERE book_id = :bookID AND author_id = :authorID;
 
 -- Customers
 DELETE FROM Customers

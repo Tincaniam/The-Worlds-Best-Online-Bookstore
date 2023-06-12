@@ -26,6 +26,8 @@ import EditBooksPage from './pages/EditBooksPage';
 import EditAuthorsPage from './pages/EditAuthorsPage';
 import EditCustomersPage from './pages/EditCustomersPage';
 import EditOrdersPage from './pages/EditOrdersPage';
+import EditBooksAuthorsPage from './pages/EditBooksAuthorsPage';
+import EditBooksOrdersPage from './pages/EditBooksOrdersPage';
 import { Link } from 'react-router-dom';
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
   const [authorToEdit, setAuthorToEdit] = useState();
   const [customerToEdit, setCustomerToEdit] = useState();
   const [orderToEdit, setOrderToEdit] = useState();
+  const [bookAuthorToEdit, setBookAuthorToEdit] = useState();
+  //const [bookOrderToEdit, setBookOrderToEdit] = useState();
 
   return (
 
@@ -116,7 +120,7 @@ function App() {
             Go to the Orders page.
           </ReactTooltip>
 
-          <Link to="/discount-codes">
+          <Link to="/discount_codes">
             <button
               type="button"
               className="button-medium"
@@ -177,11 +181,11 @@ function App() {
           <Route path="/orders">
             <OrdersPage setOrderToEdit={setOrderToEdit}/>
           </Route>
-          <Route path="/discount-codes">
+          <Route path="/discount_codes">
             <DiscountCodesPage />
           </Route>
           <Route path="/books_authors">
-            <BooksAuthorsPage />
+            <BooksAuthorsPage setBookAuthorToEdit={setBookAuthorToEdit}/>
           </Route>
           <Route path="/books_orders">
             <BooksOrdersPage />
@@ -197,6 +201,12 @@ function App() {
           </Route>
           <Route path="/edit-orders">
             <EditOrdersPage orderToEdit={orderToEdit}/>
+          </Route>
+          <Route path="/edit-books_authors">
+            <EditBooksAuthorsPage bookAuthorToEdit={bookAuthorToEdit}/>
+          </Route>
+          <Route path="/edit-books_orders">
+            <EditBooksOrdersPage />
           </Route>
           </div>
           <br></br>

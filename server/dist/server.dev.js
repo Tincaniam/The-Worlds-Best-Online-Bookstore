@@ -7,7 +7,7 @@ Citations:
     https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
     Other adaptions from "Exploration — Implementing a Full-Stack MERN App - Part 1" from CS 290 at Oregon State University.
-    Date: 2020-04-05
+    Date: 2023-04-05
     https://canvas.oregonstate.edu/courses/1869985/pages/exploration-implementing-a-full-stack-mern-app-part-1?module_item_id=22110234
 */
 var express = require('express');
@@ -27,6 +27,10 @@ var ordersRoutes = require('./routes/orders.routes.js');
 
 var discountCodesRoutes = require('./routes/discount_codes.routes.js');
 
+var booksAuthorsRoutes = require('./routes/books_authors.routes.js');
+
+var booksOrdersRoutes = require('./routes/books_orders.routes.js');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -41,7 +45,9 @@ app.use('/api/books', booksRoutes);
 app.use('/api/authors', authorsRoutes);
 app.use('/api/customers', customersRoutes);
 app.use('/api/orders', ordersRoutes);
-app.use('/api/discount_codes', discountCodesRoutes); // Listener
+app.use('/api/discount_codes', discountCodesRoutes);
+app.use('/api/books_authors', booksAuthorsRoutes);
+app.use('/api/books_orders', booksOrdersRoutes); // Listener
 
 app.listen(PORT, function () {
   // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.

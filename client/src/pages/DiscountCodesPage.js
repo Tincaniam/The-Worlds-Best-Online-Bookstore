@@ -5,55 +5,66 @@ Citations:
     https://canvas.oregonstate.edu/courses/1869985/pages/exploration-implementing-a-full-stack-mern-app-part-1?module_item_id=22110234
 */
 
-import React from 'react';
+import React, {useState} from 'react';
+import DiscountCodesTable from '../components/DiscountCodesTable';
 
-export const DiscountCodesPage = () => {
+function DiscountCodesPage() {
+    const [discount_codes, setDiscountCodes] = useState([]);
+    // discount_code_states
+    const [discount_code_name, setDiscountCodeName] = useState('');
+
+    const addDiscountCode = async () => {
+        const newDiscountCode = { discount_code_name };
+
+        const response = await fetch('/api/discount_codes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newDiscountCode)
+        });
+
+        if (!response.ok) {
+            const json = await response.json();
+            alert(json.error);
+        } else {
+            alert("Discount Code added!")
+            fetchDiscountCodes();
+        }
+    };
+
+    const fetchDiscountCodes = async () => {
+        const response = await fetch('/api/discount_codes');
+        const json = await response.json();
+        setDiscountCodes(json);
+    };
+
+    React.useEffect(() => {
+        fetchDiscountCodes();
+    }, []);
 
     return (
         <div>
-            <h3>Discount_Codes</h3>
+            <h3>Discount Codes</h3>
             <br />
-            <h5>Add Discount_Code</h5>
-            <input
-                className='form-control'
-                type="text"
-                placeholder="discount_code_name"
-                />
-            <button className="button-medium">Add Discount_Code</button>
-
-            <br /><br />
-            <table className="table table-striped">
+            <h5>Add Discount Code</h5>
+            <table>
                 <thead>
                     <tr>
-                        <th>discount_code_id</th>
                         <th>discount_code_name</th>
-                        <th>actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>10OFF</td>
-                        <td>
-                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>20OFF</td>
-                        <td>
-                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>30OFF</td>
-                        <td>
-                            <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) console.log('deleted')}}>Delete</button>
-                        </td>
+                        <td><input type="text" value={discount_code_name} onChange={e => setDiscountCodeName(e.target.value)} /></td>
                     </tr>
                 </tbody>
             </table>
+            <button className="button-medium"
+            onClick={addDiscountCode}>Add Discount Code</button>
+            <br />
+            <br />
+            <DiscountCodesTable discount_codes={discount_codes}/>
         </div>
     );
 }
