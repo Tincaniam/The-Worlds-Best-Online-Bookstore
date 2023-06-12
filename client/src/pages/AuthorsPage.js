@@ -9,6 +9,7 @@ import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthorsTable from '../components/AuthorsTable';
 
+// Authors Page
 function AuthorsPage ({setAuthorToEdit}) {
     const [authors, setAuthors] = React.useState([]);
     const history = useHistory();
@@ -18,6 +19,7 @@ function AuthorsPage ({setAuthorToEdit}) {
     const [last_name, setLastName] = useState('');
     const [emptyFields, setEmptyFields] = useState([]);
 
+    // Add author
     const addAuthor = async () => {
         const newAuthor = {
             first_name,
@@ -34,6 +36,7 @@ function AuthorsPage ({setAuthorToEdit}) {
             return;
         }
         
+        // Post request to add author
         const response = await fetch('/api/authors', {
             method: 'POST',
             headers: {
@@ -42,6 +45,7 @@ function AuthorsPage ({setAuthorToEdit}) {
             body: JSON.stringify(newAuthor)
         });
         
+        // Get response and alert user
         if (!response.ok) {
             const json = await response.json();
             alert(json.error);
@@ -53,11 +57,13 @@ function AuthorsPage ({setAuthorToEdit}) {
         }
     }
 
+    // edit author
     const editAuthor = author => {
         setAuthorToEdit(author);
         history.push('/edit-authors');
     }
 
+    // delete author
     const deleteAuthor = async author_id => {
         const response = await fetch(`/api/authors/${author_id}`, {
             method: 'DELETE'
@@ -71,6 +77,7 @@ function AuthorsPage ({setAuthorToEdit}) {
         }
     };
 
+    // fetch authors
     const fetchAuthors = async () => {
         const response = await fetch('/api/authors');
         const json = await response.json();

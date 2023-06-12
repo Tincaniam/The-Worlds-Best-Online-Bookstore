@@ -7,6 +7,7 @@ Citations:
 
 import React from 'react';
 
+// Define a DiscountCode component for the DiscountCode table.
 function DiscountCode({ discount_code }) {
     return (
 

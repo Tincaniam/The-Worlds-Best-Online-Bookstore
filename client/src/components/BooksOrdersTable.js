@@ -8,6 +8,7 @@ Citations:
 import React from 'react';
 import BookOrder from './BookOrder';
 
+// Define a BooksOrdersTable component for the BooksOrders page.
 function BooksOrdersTable({ books_orders }) {
     return (
         <table className="table table-striped">

@@ -18,16 +18,12 @@ function BooksAuthorsPage ({setBookAuthorToEdit}){
 
     // book_author states
     const [book_id, setBookID] = useState('');
-    const [book_title, setBookTitle] = useState('');
     const [author_id, setAuthorID] = useState('');
-    const [author_name, setAuthorName] = useState('');
 
     const addBookAuthor = async () => {    
         const newBookAuthor = {
             book_id,
-            book_title,
-            author_id,
-            author_name
+            author_id
         };
 
         const response = await fetch('/api/books_authors', {

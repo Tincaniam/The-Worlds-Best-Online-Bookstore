@@ -9,13 +9,15 @@ import React, {useState} from 'react';
 import DiscountCodesTable from '../components/DiscountCodesTable';
 
 function DiscountCodesPage() {
-    const [discount_codes, setDiscountCodes] = useState([]);
     // discount_code_states
+    const [discount_codes, setDiscountCodes] = useState([]);
     const [discount_code_name, setDiscountCodeName] = useState('');
 
+    // Add discount_code
     const addDiscountCode = async () => {
         const newDiscountCode = { discount_code_name };
 
+        // POST request to add discount_code
         const response = await fetch('/api/discount_codes', {
             method: 'POST',
             headers: {
@@ -33,6 +35,7 @@ function DiscountCodesPage() {
         }
     };
 
+    // GET request to fetch all discount_codes
     const fetchDiscountCodes = async () => {
         const response = await fetch('/api/discount_codes');
         const json = await response.json();

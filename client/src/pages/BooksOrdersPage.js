@@ -6,22 +6,17 @@ Citations:
 */
 
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import BooksOrdersTable from '../components/BooksOrdersTable';
 
 function BooksOrdersPage () {
     const [books_orders, setBooksOrders] = useState([]);
-    const history = useHistory();
 
     const [books, setBooks] = useState([]); // for dropdown
     const [orders, setOrders] = useState([]); // for dropdown
 
     // books_orders states
     const [book_id, setBookId] = useState('');
-    const [book_title, setBookTitle] = useState('');
     const [order_id, setOrderId] = useState('');
-    const [order_date, setOrderDate] = useState('');
-    const [order_total, setOrderTotal] = useState('');
 
     const addBookOrder = async () => {
         const newBookOrder = { book_id, order_id };

@@ -8,6 +8,7 @@ Citations:
 import React from 'react';
 import DiscountCode from './DiscountCode';
 
+// Define a DiscountCodesTable component for the DiscountCodes page.
 function DiscountCodesTable({ discount_codes }) {
     return (
         <table className="table table-striped">

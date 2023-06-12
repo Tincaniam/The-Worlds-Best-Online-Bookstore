@@ -16,7 +16,7 @@ Citation:
 */
 // helper function to normalize date format
 function normalizeDate(date) {
-  var dateParts = date.split(/[-/\.]/);
+  var dateParts = date.split(/[-/.]/);
   console.log(dateParts);
   if (dateParts.length !== 3) return date; // Reverse the date parts to get YYYY-MM-DD format
 

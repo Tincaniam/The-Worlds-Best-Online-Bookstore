@@ -6,11 +6,14 @@ Citations:
     https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
 */
 
+// Import the database connection
 const db = require("../db-connector.js");
 
+// Used to disable and enable foreign key checks
 const disableForeignKeyChecks = `SET FOREIGN_KEY_CHECKS=0;`;
 const enableForeignKeyChecks = `SET FOREIGN_KEY_CHECKS=1;`;
 
+// Define the Order class
 class Order {
     constructor(order) {
         this.customer_id = order.customer_id;
@@ -19,6 +22,7 @@ class Order {
         this.discount_code_id = order.discount_code_id;
     }
 
+    // Create query used by create()
     static createQuery(newOrder, result) {
         db.query(`
         INSERT INTO Orders (customer_id, order_date, order_total, discount_code_id)
@@ -38,6 +42,7 @@ class Order {
         });
     }
 
+    // Create a new order
     static create(newOrder, result) {
         db.query(disableForeignKeyChecks, (err, res) => {
             if (err) {
@@ -61,6 +66,7 @@ class Order {
         });
     }
 
+    // Get an order by order_id
     static getByID(orderID, result) {
         db.query(`SELECT * FROM Orders WHERE order_id = ${orderID}`, (err, res) => {
             if (err) {
@@ -80,6 +86,7 @@ class Order {
         });
     }
 
+    // Get all orders
     static getAll(result) {
         db.query('SELECT Orders.order_id, Orders.customer_id, CONCAT(Customers.first_name, " ", Customers.last_name) AS customer_name, Orders.order_date, Orders.order_total, Orders.discount_code_id, Discount_Codes.discount_code_name FROM Orders INNER JOIN Customers ON Orders.customer_id = Customers.customer_id LEFT OUTER JOIN Discount_Codes ON Orders.discount_code_id = Discount_Codes.discount_code_id ORDER BY Orders.order_id ASC;'
         ,(err, res) => {
@@ -95,6 +102,7 @@ class Order {
         });
     }
 
+    // Update query used by updateByID()
     static updateQuery(orderID, order, result) {
         db.query(`UPDATE Orders SET customer_id = '${order.customer_id}', order_date = '${order.order_date}', order_total = '${order.order_total}', discount_code_id = '${order.discount_code_id}' WHERE order_id = ${orderID}`,
         (err, res) => {
@@ -114,6 +122,7 @@ class Order {
         });
     }
 
+    // Update an order by order_id
     static updateByID(orderID, order, result) {
         db.query(disableForeignKeyChecks, (err, res) => {
             if (err) {
@@ -137,6 +146,7 @@ class Order {
         }); 
     }
 
+    // Delete an order by order_id
     static deleteByID(orderID, result) {
         db.query(`DELETE FROM Orders WHERE order_id = ${orderID}`, (err, res) => {
             if (err) {

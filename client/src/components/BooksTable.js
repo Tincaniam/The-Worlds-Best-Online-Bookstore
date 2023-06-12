@@ -8,6 +8,7 @@ Citations:
 import React from 'react';
 import Book from './Book';
 
+// Define a BooksTable component for the Books page.
 function BooksTable({ books, editBook, deleteBook }) {
     return (
         <table className="table table-striped">

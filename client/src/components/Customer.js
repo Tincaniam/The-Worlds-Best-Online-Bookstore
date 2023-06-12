@@ -7,6 +7,7 @@ Citations:
 
 import React from 'react';
 
+// Define a Customer component for the Customer table.
 function Customer({ customer, editCustomer, deleteCustomer }) {
     return (
 

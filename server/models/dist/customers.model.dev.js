@@ -13,7 +13,9 @@ Citations:
     Date: 2023-04-05
     https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
 */
-var db = require('../db-connector');
+// Import the database connection
+var db = require('../db-connector'); // Define the Customer class
+
 
 var Customer =
 /*#__PURE__*/
@@ -26,7 +28,8 @@ function () {
     this.address = customer.address;
     this.email_address = customer.email_address;
     this.phone_number = customer.phone_number;
-  }
+  } // Create a new customer
+
 
   _createClass(Customer, null, [{
     key: "create",
@@ -48,7 +51,8 @@ function () {
 
         ;
       });
-    }
+    } // Retrieve a single customer with customerID
+
   }, {
     key: "getById",
     value: function getById(customerID, result) {
@@ -70,7 +74,8 @@ function () {
 
         ;
       });
-    }
+    } // Retrieve all customers
+
   }, {
     key: "getAll",
     value: function getAll(result) {
@@ -86,7 +91,8 @@ function () {
 
         ;
       });
-    }
+    } // Update a customer with customerID
+
   }, {
     key: "updateByID",
     value: function updateByID(customerID, customer, result) {
@@ -111,7 +117,8 @@ function () {
           });
         }
       });
-    }
+    } // Delete a customer with customerID
+
   }, {
     key: "deleteByID",
     value: function deleteByID(customerID, result) {

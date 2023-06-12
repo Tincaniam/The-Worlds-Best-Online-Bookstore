@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 
 export const EditCustomersPage = ({customerToEdit}) => {
 
+    // Customer state variables
     const [first_name, setFirstName] = useState(customerToEdit.first_name);
     const [last_name, setLastName] = useState(customerToEdit.last_name);
     const [address, setAddress] = useState(customerToEdit.address);
@@ -19,10 +20,12 @@ export const EditCustomersPage = ({customerToEdit}) => {
 
     let history = useHistory();
 
+    // Go back to customers page
     const backToCustomers = () => {
         history.push('/customers');
     }
 
+    // Edit customer
     const editCustomer = async () => {
         const editedCustomer = { first_name, last_name, address, email_address, phone_number };
         const response = await fetch(`/api/customers/${customerToEdit.customer_id}`, {

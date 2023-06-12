@@ -10,16 +10,19 @@ import { useHistory } from 'react-router-dom';
 
 export const EditBooksPage = ({bookToEdit}) => {
 
+    // State variables
     const [title, setTitle] = useState(bookToEdit.title);
     const [publication_date, setPublicationDate] = useState(bookToEdit.publication_date);
     const [emptyFields, setEmptyFields] = useState([]);
 
     let history = useHistory();
 
+    // Back to books
     const backToBooks = () => {
         history.push('/books');
     }
 
+    // Edit book
     const editBook = async () => {
         const editedBook = { title, publication_date };
         const response = await fetch(`/api/books/${bookToEdit.book_id}`, {

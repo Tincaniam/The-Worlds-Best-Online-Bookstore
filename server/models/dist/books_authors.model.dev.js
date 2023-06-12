@@ -13,10 +13,12 @@ Citations:
     Date: 2023-04-05
     https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
 */
-var db = require("../db-connector.js");
+// Import the database connection
+var db = require("../db-connector.js"); // To enable/disable foreign key checks
+
 
 var disableForeignKeyChecks = "SET FOREIGN_KEY_CHECKS=0;";
-var enableForeignKeyChecks = "SET FOREIGN_KEY_CHECKS=1;";
+var enableForeignKeyChecks = "SET FOREIGN_KEY_CHECKS=1;"; // Define the Book_Author class
 
 var Book_Author =
 /*#__PURE__*/
@@ -26,7 +28,8 @@ function () {
 
     this.book_id = book_author.book_id;
     this.author_id = book_author.author_id;
-  }
+  } // Retrieve all book_authors
+
 
   _createClass(Book_Author, null, [{
     key: "getAll",
@@ -41,7 +44,8 @@ function () {
         console.log("books_authors: ", res);
         result(null, res);
       });
-    }
+    } // Create query used by create()
+
   }, {
     key: "createQuery",
     value: function createQuery(newBook_Author, result) {
@@ -62,13 +66,8 @@ function () {
 
         ;
       });
-      console.log("newBook_Author: ");
-      console.log(newBook_Author);
-      console.log("newBook_Author.book_id: ");
-      console.log(newBook_Author.book_id);
-      console.log("newBook_Author.author_id: ");
-      console.log(newBook_Author.author_id);
-    }
+    } // Create a new book_author
+
   }, {
     key: "create",
     value: function create(newBook_Author, result) {
@@ -94,7 +93,8 @@ function () {
 
         ;
       });
-    }
+    } // Update a book_author by book_id and author_id
+
   }, {
     key: "updateByID",
     value: function updateByID(book_id, author_id, book_author, result) {
@@ -121,7 +121,8 @@ function () {
 
         ;
       });
-    }
+    } // Delete a book_author by book_id and author_id
+
   }, {
     key: "deleteByID",
     value: function deleteByID(book_id, author_id, result) {

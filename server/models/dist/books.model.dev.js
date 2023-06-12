@@ -13,7 +13,9 @@ Citations:
     Date: 2023-04-05
     https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
 */
-var db = require('../db-connector');
+// Import the database connection
+var db = require('../db-connector'); // Define the Book class
+
 
 var Book =
 /*#__PURE__*/
@@ -23,7 +25,8 @@ function () {
 
     this.title = book.title;
     this.publication_date = book.publication_date;
-  }
+  } // Create a new book
+
 
   _createClass(Book, null, [{
     key: "create",
@@ -45,7 +48,8 @@ function () {
 
         ;
       });
-    }
+    } // Retrieve a single book with bookID
+
   }, {
     key: "getByID",
     value: function getByID(bookID, result) {
@@ -67,7 +71,8 @@ function () {
 
         ;
       });
-    }
+    } // Retrieve all books
+
   }, {
     key: "getAll",
     value: function getAll(result) {
@@ -83,7 +88,8 @@ function () {
 
         ;
       });
-    }
+    } // Update a book with bookID
+
   }, {
     key: "updateByID",
     value: function updateByID(bookID, book, result) {
@@ -109,7 +115,8 @@ function () {
 
         ;
       });
-    }
+    } // Delete a book with bookID
+
   }, {
     key: "deleteByID",
     value: function deleteByID(bookID, result) {

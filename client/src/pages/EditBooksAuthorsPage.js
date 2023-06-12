@@ -19,9 +19,7 @@ export const EditBooksAuthorsPage = ({bookAuthorToEdit}) => {
     const old_book_id = bookAuthorToEdit.book_author.book_id;
     const old_author_id = bookAuthorToEdit.book_author.author_id;
     const [book_id, setBookId] = useState(bookAuthorToEdit.book_author.book_id);
-    const [book_title, setBookTitle] = useState(bookAuthorToEdit.book_author.book_title);
     const [author_id, setAuthorId] = useState(bookAuthorToEdit.book_author.author_id);
-    const [author_name, setAuthorName] = useState(bookAuthorToEdit.book_author.author_name);
 
     let history = useHistory();
 
@@ -33,7 +31,7 @@ export const EditBooksAuthorsPage = ({bookAuthorToEdit}) => {
         const editedBookAuthor = { book_id, author_id };
         console.log(book_id);
         console.log(editedBookAuthor)
-        const response = fetch(`/api/books_authors/${old_book_id}/${old_author_id}`, {
+        fetch(`/api/books_authors/${old_book_id}/${old_author_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

@@ -20,7 +20,6 @@ export const EditOrdersPage = ({orderToEdit}) => {
     const [order_date, setOrderDate] = useState(orderToEdit.order_date);
     const [order_total, setOrderTotal] = useState(orderToEdit.order_total);
     const [discount_code_id, setDiscountCodeId] = useState(orderToEdit.discount_code_id);
-    const [discount_code_name, setDiscountCodeName] = useState(orderToEdit.discount_code_name);
     const [emptyFields, setEmptyFields] = useState([]);
 
     let history = useHistory();

@@ -11,6 +11,8 @@ import OrdersTable from '../components/OrdersTable';
 import { normalizeDate } from '../components/utils';
 
 function OrdersPage ({setOrderToEdit}) {
+
+    // State variables
     const [orders, setOrders] = React.useState([]);
     const history = useHistory();
 
@@ -42,11 +44,13 @@ function OrdersPage ({setOrderToEdit}) {
         if (!newOrder.order_total) emptyFields.push('order_total');
         // Discount code is optional
 
+        // If there are empty required fields, alert user and return
         if (emptyFields.length) {
             setEmptyFields(emptyFields);
             return;
         }
 
+        // Send POST request to add order
         const response = await fetch('/api/orders', {
             method: 'POST',
             headers: {
@@ -54,7 +58,8 @@ function OrdersPage ({setOrderToEdit}) {
             },
             body: JSON.stringify(newOrder)
         });
-
+        
+        // Get response body and alert
         if (!response.ok) {
             const json = await response.json();
             alert(json.error);

@@ -6,17 +6,21 @@ Citations:
     https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
 */
 
+// Import the database connection
 const db = require("../db-connector.js");
 
+// Used to disable and enable foreign key checks
 const disableForeignKeyChecks = "SET FOREIGN_KEY_CHECKS=0;";
 const enableForeignKeyChecks = "SET FOREIGN_KEY_CHECKS=1;";
 
+// Define the Book_Order class
 class Book_Order {
     constructor(book_order) {
         this.book_id = book_order.book_id;
         this.order_id = book_order.order_id;
     }
 
+    // Retrieve all book_orders
     static getAll(result) {
         db.query('SELECT Books.book_id, Books.title AS book_title, Orders.order_id, Orders.order_date, Orders.order_total FROM Books_Orders INNER JOIN Books ON Books_Orders.book_id = Books.book_id INNER JOIN Orders ON Books_Orders.order_id = Orders.order_id;', (err, res) => {
             if (err) {
@@ -30,6 +34,7 @@ class Book_Order {
         );
     }
 
+    // Create query used by create()
     static createQuery(newBook_Order, result) {
         db.query(`INSERT INTO Books_Orders (book_id, order_id) VALUES ('${newBook_Order.book_id}', '${newBook_Order.order_id}');`,
 
@@ -44,15 +49,9 @@ class Book_Order {
                     result(null, { res });
                 };
             });
-
-        console.log("newBook_Order: ");
-        console.log(newBook_Order);
-        console.log("newBook_Order.book_id: ");
-        console.log(newBook_Order.book_id);
-        console.log("newBook_Order.order_id: ");
-        console.log(newBook_Order.order_id);
     }
 
+    // Create a new book_order
     static create(newBook_Order, result) {
         db.query(disableForeignKeyChecks, (err, res) => {
             if (err) {
@@ -75,7 +74,6 @@ class Book_Order {
             }
         });
     }
-
 }
 
 module.exports = Book_Order;

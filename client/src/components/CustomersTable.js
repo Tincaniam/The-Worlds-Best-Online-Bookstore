@@ -8,6 +8,7 @@ Citations:
 import React from 'react';
 import Customer from './Customer';
 
+// Define a CustomersTable component for the Customers page.
 function CustomersTable({ customers, editCustomer, deleteCustomer }) {
     return (
         <table className="table table-striped">

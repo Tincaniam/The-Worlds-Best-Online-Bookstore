@@ -8,6 +8,7 @@ Citations:
 import React from 'react';
 import Order from './Order';
 
+// Define a OrdersTable component for the Orders page.
 function OrdersTable({ orders, editOrder, deleteOrder }) {
     return (
         <table className="table table-striped">

@@ -7,6 +7,7 @@ Citations:
 
 import React from 'react';
 
+// Define a Book component for the Books Table.
 function Book({ book, editBook, deleteBook }) {
     return (
 

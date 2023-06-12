@@ -13,10 +13,12 @@ Citations:
     Date: 2023-04-05
     https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
 */
-var db = require("../db-connector.js");
+// Import the database connection
+var db = require("../db-connector.js"); // Used to disable and enable foreign key checks
+
 
 var disableForeignKeyChecks = "SET FOREIGN_KEY_CHECKS=0;";
-var enableForeignKeyChecks = "SET FOREIGN_KEY_CHECKS=1;";
+var enableForeignKeyChecks = "SET FOREIGN_KEY_CHECKS=1;"; // Define the Order class
 
 var Order =
 /*#__PURE__*/
@@ -28,7 +30,8 @@ function () {
     this.order_date = order.order_date;
     this.order_total = order.order_total;
     this.discount_code_id = order.discount_code_id;
-  }
+  } // Create query used by create()
+
 
   _createClass(Order, null, [{
     key: "createQuery",
@@ -50,7 +53,8 @@ function () {
 
         ;
       });
-    }
+    } // Create a new order
+
   }, {
     key: "create",
     value: function create(newOrder, result) {
@@ -76,7 +80,8 @@ function () {
 
         ;
       });
-    }
+    } // Get an order by order_id
+
   }, {
     key: "getByID",
     value: function getByID(orderID, result) {
@@ -98,7 +103,8 @@ function () {
 
         ;
       });
-    }
+    } // Get all orders
+
   }, {
     key: "getAll",
     value: function getAll(result) {
@@ -114,7 +120,8 @@ function () {
 
         ;
       });
-    }
+    } // Update query used by updateByID()
+
   }, {
     key: "updateQuery",
     value: function updateQuery(orderID, order, result) {
@@ -139,7 +146,8 @@ function () {
 
         ;
       });
-    }
+    } // Update an order by order_id
+
   }, {
     key: "updateByID",
     value: function updateByID(orderID, order, result) {
@@ -165,7 +173,8 @@ function () {
 
         ;
       });
-    }
+    } // Delete an order by order_id
+
   }, {
     key: "deleteByID",
     value: function deleteByID(orderID, result) {

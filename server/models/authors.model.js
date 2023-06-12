@@ -6,14 +6,17 @@ Citations:
     https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
 */
 
+// Import the database connection
 const db = require('../db-connector');
 
+// Define the Author class
 class Author {
     constructor(author) {
         this.first_name = author.first_name;
         this.last_name = author.last_name;
     }
     
+    // Create a new author
     static create(newAuthor, result) {
         db.query(`INSERT INTO Authors (first_name, last_name)
         VALUES ('${newAuthor.first_name}', '${newAuthor.last_name}');`,
@@ -31,6 +34,7 @@ class Author {
         });
     }
 
+    // Retrieve a single author with authorID
     static getByID(authorID, result) {
         db.query(`SELECT * FROM Authors WHERE author_id = ${authorID}`, (err, res) => {
             if (err) {
@@ -50,6 +54,7 @@ class Author {
         });
     }
 
+    // Retrieve all authors
     static getAll(result) {
         db.query("SELECT * FROM Authors", (err, res) => {
             if (err) {
@@ -64,6 +69,7 @@ class Author {
         });
     }
 
+    // Update a author with authorID
     static updateByID(authorID, author, result) {
         //db.query("UPDATE Authors SET first_name = ?, last_name = ? WHERE author_id = ?", [author.first_name, author.last_name, id], (err, res) => {
         db.query(`UPDATE Authors SET first_name = '${author.first_name}', last_name = '${author.last_name}' WHERE author_id = ${authorID};`,
@@ -85,6 +91,7 @@ class Author {
         });
     }
 
+    // Delete a author with authorID
     static deleteByID(authorID, result) {
         db.query(`DELETE FROM Authors WHERE author_id = ${authorID}`,
         (err, res) => {
@@ -106,4 +113,5 @@ class Author {
     }
 }
 
+// Export the Author class
 module.exports = Author;

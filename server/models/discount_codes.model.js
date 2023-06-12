@@ -6,13 +6,17 @@ Citations:
     https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
 */
 
+// Import the database connection
 const db = require("../db-connector.js");
 const { deleteByID } = require("./books.model.js");
 
+// Define the DiscountCode class
 class DiscountCode {
     constructor(discount_code) {
         this.discount_code_name = discount_code.discount_code_name;
     }
+
+    // Create a new discount code
     static create(newDiscountCode, result) {
         db.query(`INSERT INTO Discount_Codes (discount_code_name)
         VALUES ('${newDiscountCode.discount_code_name}');`,
@@ -29,6 +33,8 @@ class DiscountCode {
 
         });
     }
+
+    // Retrieve a single discount code with discountCodeId
     static getById(discountCodeId, result) {
         db.query(`SELECT * FROM Discount_Codes WHERE discount_code_id = ${discountCodeId}`, (err, res) => {
             if (err) {
@@ -47,6 +53,8 @@ class DiscountCode {
             };
         });
     }
+
+    // Retrieve all discount codes
     static getAll(result) {
         db.query("SELECT * FROM Discount_Codes", (err, res) => {
             if (err) {
@@ -60,6 +68,8 @@ class DiscountCode {
             };
         });
     }
+
+    // Delete discount code with discountCodeID
     static deleteByID(discountCodeID, result) {
         db.query(`DELETE FROM Discount_Codes WHERE discount_code_id = ${discountCodeID}`, (err, res) => {
             if (err) {

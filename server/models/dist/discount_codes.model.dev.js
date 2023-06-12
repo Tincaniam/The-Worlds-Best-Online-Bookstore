@@ -13,10 +13,12 @@ Citations:
     Date: 2023-04-05
     https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
 */
+// Import the database connection
 var db = require("../db-connector.js");
 
 var _require = require("./books.model.js"),
-    deleteByID = _require.deleteByID;
+    deleteByID = _require.deleteByID; // Define the DiscountCode class
+
 
 var DiscountCode =
 /*#__PURE__*/
@@ -25,7 +27,8 @@ function () {
     _classCallCheck(this, DiscountCode);
 
     this.discount_code_name = discount_code.discount_code_name;
-  }
+  } // Create a new discount code
+
 
   _createClass(DiscountCode, null, [{
     key: "create",
@@ -47,7 +50,8 @@ function () {
 
         ;
       });
-    }
+    } // Retrieve a single discount code with discountCodeId
+
   }, {
     key: "getById",
     value: function getById(discountCodeId, result) {
@@ -69,7 +73,8 @@ function () {
 
         ;
       });
-    }
+    } // Retrieve all discount codes
+
   }, {
     key: "getAll",
     value: function getAll(result) {
@@ -85,7 +90,8 @@ function () {
 
         ;
       });
-    }
+    } // Delete discount code with discountCodeID
+
   }, {
     key: "deleteByID",
     value: function deleteByID(discountCodeID, result) {

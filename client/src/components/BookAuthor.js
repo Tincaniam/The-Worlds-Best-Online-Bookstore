@@ -7,6 +7,7 @@ Citations:
 
 import React from 'react';
 
+// Define a BookAuthor component for the BookAuthor table.
 function BookAuthor({ book_author, editBookAuthor, deleteBookAuthor }) {
     return (
 

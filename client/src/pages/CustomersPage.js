@@ -21,6 +21,7 @@ function CustomersPage ({setCustomerToEdit}) {
     const [phone_number, setPhoneNumber] = useState('');
     const [emptyFields, setEmptyFields] = useState([]);
 
+    // Add customer
     const addCustomer = async () => {
         const newCustomer = {
             first_name,
@@ -45,6 +46,7 @@ function CustomersPage ({setCustomerToEdit}) {
             return;
         }
 
+        // Post request to add customer
         const response = await fetch('/api/customers', {
             method: 'POST',
             headers: {
@@ -64,11 +66,13 @@ function CustomersPage ({setCustomerToEdit}) {
         }
     }
 
+    // Edit customer
     const editCustomer = customer => {
         setCustomerToEdit(customer);
         history.push('/edit-customers');
     }
 
+    // Delete customer
     const deleteCustomer = async customer_id => {
         const response = await fetch(`/api/customers/${customer_id}`, {method: 'DELETE'});
         if (response.ok) {
@@ -79,6 +83,7 @@ function CustomersPage ({setCustomerToEdit}) {
         }
     };
 
+    // Fetch customers
     const fetchCustomers = async () => {
         const response = await fetch('/api/customers');
         const json = await response.json();

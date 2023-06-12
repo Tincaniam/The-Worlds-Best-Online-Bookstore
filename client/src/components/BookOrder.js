@@ -7,6 +7,7 @@ Citations:
 
 import React from 'react';
 
+// Define a BookOrder component for the BookOrder table.
 function BookOrder({ book_order }) {
     return (
 

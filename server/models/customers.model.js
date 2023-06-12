@@ -6,8 +6,10 @@ Citations:
     https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
 */
 
+// Import the database connection
 const db = require('../db-connector');
 
+// Define the Customer class
 class Customer {
     constructor(customer) {
         this.first_name = customer.first_name;
@@ -17,6 +19,7 @@ class Customer {
         this.phone_number = customer.phone_number;
     }
 
+    // Create a new customer
     static create(newCustomer, result) {
         db.query(`INSERT INTO Customers (first_name, last_name, address, email_address, phone_number)
         VALUES ('${newCustomer.first_name}', '${newCustomer.last_name}', '${newCustomer.address}', '${newCustomer.email_address}', '${newCustomer.phone_number}');`,
@@ -34,6 +37,7 @@ class Customer {
         });
     }
 
+    // Retrieve a single customer with customerID
     static getById(customerID, result) {
         db.query(`SELECT * FROM Customers WHERE customer_id = ${customerID}`, (err, res) => {
             if (err) {
@@ -53,6 +57,7 @@ class Customer {
         });
     }
 
+    // Retrieve all customers
     static getAll(result) {
         db.query("SELECT * FROM Customers", (err, res) => {
             if (err) {
@@ -67,6 +72,7 @@ class Customer {
         });
     }
 
+    // Update a customer with customerID
     static updateByID(customerID, customer, result) {
         //db.query(`UPDATE Customers SET first_name = , last_name = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zip_code = ? WHERE customer_id = ?`,
         db.query(`UPDATE Customers SET first_name = '${customer.first_name}', last_name = '${customer.last_name}', address = '${customer.address}', email_address = '${customer.email_address}', phone_number = '${customer.phone_number}' WHERE customer_id = ${customerID}`,
@@ -88,6 +94,7 @@ class Customer {
         });
     }
 
+    // Delete a customer with customerID
     static deleteByID(customerID, result) {
         db.query(`DELETE FROM Customers WHERE customer_id = ${customerID}`,
         (err, res) => {

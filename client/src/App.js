@@ -1,6 +1,7 @@
 /*
 Citations:
     Initial adaption from "Exploration — Implementing a Full-Stack MERN App - Part 1" from CS 290 at Oregon State University.
+    Some examples were taken as a starting point from the CS 290 class materials, which were then heavily modified to fit the needs of this project.
     Date: 2023-04-05
     https://canvas.oregonstate.edu/courses/1869985/pages/exploration-implementing-a-full-stack-mern-app-part-1?module_item_id=22110234
 */
@@ -32,12 +33,12 @@ import { Link } from 'react-router-dom';
 
 function App() {
 
+  // State variables for the data that is being edited.
   const [bookToEdit, setBookToEdit] = useState();
   const [authorToEdit, setAuthorToEdit] = useState();
   const [customerToEdit, setCustomerToEdit] = useState();
   const [orderToEdit, setOrderToEdit] = useState();
   const [bookAuthorToEdit, setBookAuthorToEdit] = useState();
-  //const [bookOrderToEdit, setBookOrderToEdit] = useState();
 
   return (
 

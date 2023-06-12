@@ -19,6 +19,7 @@ function BooksPage ({setBookToEdit}) {
     const [publication_date, setPublicationDate] = useState('');
     const [emptyFields, setEmptyFields] = useState([]);
 
+    // Add book
     const addBook = async () => {
         const newBook = {
             title,
@@ -38,6 +39,7 @@ function BooksPage ({setBookToEdit}) {
             return;
         }
         
+        // Send POST request to add book
         const response = await fetch('/api/books', {
             method: 'POST',
             headers: {
@@ -56,11 +58,13 @@ function BooksPage ({setBookToEdit}) {
         }
     }
 
+    // Edit book
     const editBook = book => {
         setBookToEdit(book);
         history.push('/edit-books');
     }
 
+    // Delete book
     const deleteBook = async book_id => {
         const response = await fetch(`/api/books/${book_id}`, {method: 'DELETE'});
         if (response.ok) {
@@ -70,6 +74,7 @@ function BooksPage ({setBookToEdit}) {
         }
     };
 
+    // Fetch books
     const fetchBooks = async () => {
         const response = await fetch('/api/books');
         const data = await response.json();

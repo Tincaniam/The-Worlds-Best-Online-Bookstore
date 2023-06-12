@@ -14,10 +14,11 @@ var mysql = require('mysql'); // Create a 'connection pool' using the provided c
 var db = mysql.createConnection({
   connectionLimit: 10,
   host: 'classmysql.engr.oregonstate.edu',
-  user: 'cs340_tinnelm',
-  password: '7970',
-  database: 'cs340_tinnelm'
+  user: 'YOUR_USERNAME_HERE',
+  password: 'YOUR_PASSWORD_HERE',
+  database: 'YOUR_DATABASE_NAME_HERE'
 }); // Citations:
+//   Adapted from:
 //   "Database integration"
 //   Date: 2023-05-01
 //   https://expressjs.com/en/guide/database-integration.html

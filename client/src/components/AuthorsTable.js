@@ -8,6 +8,7 @@ Citations:
 import React from 'react';
 import Author from './Author';
 
+// Define an AuthorsTable component for the Authors page.
 function AuthorsTable({ authors, editAuthor, deleteAuthor }) {
     return (
         <table className="table table-striped">

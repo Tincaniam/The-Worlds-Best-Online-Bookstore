@@ -9,7 +9,7 @@ Citation:
 
 // helper function to normalize date format
 function normalizeDate (date) {
-    let dateParts = date.split(/[-/\.]/);
+    let dateParts = date.split(/[-/.]/);
     console.log(dateParts);
 
     if (dateParts.length !== 3) return date;
@@ -33,6 +33,3 @@ function normalizeDate (date) {
 }
 
 export { normalizeDate };
-
-
-

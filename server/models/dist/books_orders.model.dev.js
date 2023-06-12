@@ -13,10 +13,12 @@ Citations:
     Date: 2023-04-05
     https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
 */
-var db = require("../db-connector.js");
+// Import the database connection
+var db = require("../db-connector.js"); // Used to disable and enable foreign key checks
+
 
 var disableForeignKeyChecks = "SET FOREIGN_KEY_CHECKS=0;";
-var enableForeignKeyChecks = "SET FOREIGN_KEY_CHECKS=1;";
+var enableForeignKeyChecks = "SET FOREIGN_KEY_CHECKS=1;"; // Define the Book_Order class
 
 var Book_Order =
 /*#__PURE__*/
@@ -26,7 +28,8 @@ function () {
 
     this.book_id = book_order.book_id;
     this.order_id = book_order.order_id;
-  }
+  } // Retrieve all book_orders
+
 
   _createClass(Book_Order, null, [{
     key: "getAll",
@@ -41,7 +44,8 @@ function () {
         console.log("books_orders: ", res);
         result(null, res);
       });
-    }
+    } // Create query used by create()
+
   }, {
     key: "createQuery",
     value: function createQuery(newBook_Order, result) {
@@ -62,13 +66,8 @@ function () {
 
         ;
       });
-      console.log("newBook_Order: ");
-      console.log(newBook_Order);
-      console.log("newBook_Order.book_id: ");
-      console.log(newBook_Order.book_id);
-      console.log("newBook_Order.order_id: ");
-      console.log(newBook_Order.order_id);
-    }
+    } // Create a new book_order
+
   }, {
     key: "create",
     value: function create(newBook_Order, result) {

@@ -6,13 +6,17 @@ Citations:
     https://medium.com/@rahulguptalive/create-crud-apis-in-nodejs-express-and-mysql-abda4dfc2d6
 */
 
+// Import the database connection
 const db = require('../db-connector');
 
+// Define the Book class
 class Book {
     constructor(book) {
         this.title = book.title;
         this.publication_date = book.publication_date;
     }
+
+    // Create a new book
     static create(newBook, result) {
         db.query(`INSERT INTO Books (title, publication_date)
         VALUES ('${newBook.title}', '${newBook.publication_date}');`,
@@ -29,6 +33,8 @@ class Book {
 
         });
     }
+
+    // Retrieve a single book with bookID
     static getByID(bookID, result) {
         db.query(`SELECT * FROM Books WHERE book_id = ${bookID}`, (err, res) => {
             if (err) {
@@ -47,6 +53,8 @@ class Book {
             };
         });
     }
+
+    // Retrieve all books
     static getAll(result) {
         db.query("SELECT * FROM Books", (err, res) => {
             if (err) {
@@ -60,6 +68,8 @@ class Book {
             };
         });
     }
+
+    // Update a book with bookID
     static updateByID(bookID, book, result) {
 
         db.query(`UPDATE Books SET title = '${book.title}', publication_date = '${book.publication_date}' WHERE book_id = ${bookID}`,
@@ -80,6 +90,8 @@ class Book {
             };
         });
     }
+
+    // Delete a book with bookID
     static deleteByID(bookID, result) {
         db.query(`DELETE FROM Books WHERE book_id = ${bookID}`,
         (err, res) => {

@@ -11,16 +11,19 @@ import { useHistory } from 'react-router-dom';
 
 export const EditAuthorsPage = ({authorToEdit}) => {
 
+    // State variables
     const [first_name, setFirstName] = useState(authorToEdit.first_name);
     const [last_name, setLastName] = useState(authorToEdit.last_name);
     const [emptyFields, setEmptyFields] = useState([]);
 
     let history = useHistory();
 
+    // Back to authors page
     const backToAuthors = () => {
         history.push('/authors');
     }
 
+    // Edit author
     const editAuthor = async () => {
         const editedAuthor = { first_name, last_name };
         const response = await fetch(`/api/authors/${authorToEdit.author_id}`, {

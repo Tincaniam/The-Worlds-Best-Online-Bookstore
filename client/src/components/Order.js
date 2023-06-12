@@ -7,6 +7,7 @@ Citations:
 
 import React from 'react';
 
+// Define a Order component for the Order table.
 function Order({ order, editOrder, deleteOrder }) {
     return (
 
