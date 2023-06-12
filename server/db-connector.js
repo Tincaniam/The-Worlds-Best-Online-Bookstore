@@ -1,6 +1,7 @@
 /*
 Citations:
     DB Connection code adapted from the "nodejs-starter-app" from CS 340 at Oregon State University.
+    This includes making the connection and exporting it for use in the application.
     Date: 2023-04-05
     https://github.com/osu-cs340-ecampus/nodejs-starter-app
 */

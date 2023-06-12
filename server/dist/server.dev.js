@@ -7,6 +7,7 @@ Citations:
     https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
     Other adaptions from "Exploration — Implementing a Full-Stack MERN App - Part 1" from CS 290 at Oregon State University.
+    These include basic setup of the server, the listener, and the routes.
     Date: 2023-04-05
     https://canvas.oregonstate.edu/courses/1869985/pages/exploration-implementing-a-full-stack-mern-app-part-1?module_item_id=22110234
 */
