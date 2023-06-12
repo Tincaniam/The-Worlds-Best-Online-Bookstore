@@ -16,12 +16,12 @@ export const EditBooksAuthorsPage = ({bookAuthorToEdit}) => {
     const [authors, setAuthors] = useState([]);  // for dropdown
 
     // book_author states
-    const old_book_id = bookAuthorToEdit.book_id;
-    const old_author_id = bookAuthorToEdit.author_id;
-    const [book_id, setBookId] = useState(bookAuthorToEdit.book_id);
-    const [book_title, setBookTitle] = useState(bookAuthorToEdit.book_title);
-    const [author_id, setAuthorId] = useState(bookAuthorToEdit.author_id);
-    const [author_name, setAuthorName] = useState(bookAuthorToEdit.author_name);
+    const old_book_id = bookAuthorToEdit.book_author.book_id;
+    const old_author_id = bookAuthorToEdit.book_author.author_id;
+    const [book_id, setBookId] = useState(bookAuthorToEdit.book_author.book_id);
+    const [book_title, setBookTitle] = useState(bookAuthorToEdit.book_author.book_title);
+    const [author_id, setAuthorId] = useState(bookAuthorToEdit.book_author.author_id);
+    const [author_name, setAuthorName] = useState(bookAuthorToEdit.book_author.author_name);
 
     let history = useHistory();
 
@@ -33,7 +33,7 @@ export const EditBooksAuthorsPage = ({bookAuthorToEdit}) => {
         const editedBookAuthor = { book_id, author_id };
         console.log(book_id);
         console.log(editedBookAuthor)
-        const response = await fetch(`/api/books_authors/${old_book_id}/${old_author_id}`, {
+        const response = fetch(`/api/books_authors/${old_book_id}/${old_author_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -41,13 +41,9 @@ export const EditBooksAuthorsPage = ({bookAuthorToEdit}) => {
             body: JSON.stringify(editedBookAuthor)
         });
 
-        if (!response.ok) {
-            const json = await response.json();
-            alert(json.error);
-        } else {
-            alert("Book_Author edited!")
-            history.push('/books_authors');
-        }
+        alert("Book_Author edited!")
+        history.push('/books_authors');
+        
     };
 
     React.useEffect(() => {

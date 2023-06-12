@@ -49,6 +49,7 @@ function BooksAuthorsPage ({setBookAuthorToEdit}){
 
     const editBookAuthor = book_author => {
         setBookAuthorToEdit({book_author});
+        console.log("book_author: " + book_author);
         history.push('/edit-books_authors');
     }
 
