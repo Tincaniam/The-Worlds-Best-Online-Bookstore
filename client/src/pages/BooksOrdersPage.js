@@ -36,7 +36,13 @@ function BooksOrdersPage () {
 
         if (!response.ok) {
             const json = await response.json();
-            alert(json.error);
+            if (response.status === 500){
+                alert("Book_Order relationship already exists");
+                fetchBooksOrders();
+            }
+            else {
+                alert(json.error);
+            }
         }
         else {
             alert("Book_Order added");
