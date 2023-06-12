@@ -16,6 +16,7 @@ function BookAuthor({ book_author, editBookAuthor, deleteBookAuthor }) {
             <td>{book_author.author_id}</td>
             <td>{book_author.author_name}</td>
             <td>
+                <button className="btn btn-outline-primary" onClick={() => editBookAuthor(book_author)}>Edit</button>
                 <button className="btn btn-outline-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteBookAuthor(book_author.book_id, book_author.author_id)}}>Delete</button>
             </td>
         </tr>

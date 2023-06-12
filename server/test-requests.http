@@ -74,12 +74,12 @@ content-type: application/json
 }
 
 ### Update Order By ID
-PUT http://localhost:4000/api/orders/29 HTTP/1.1
+PUT http://localhost:4000/api/orders/3 HTTP/1.1
 
 {
-    "customer_id": 1,
-    "order_date": "2020-01-01",
-    "order_total": 200.00
+    "customer_id": 3,
+    "order_date": "2023-05-04T16:03:28.000Z",
+    "order_total": 55.12
 }
 
 ### Get all Books_Authors
@@ -95,12 +95,12 @@ content-type: application/json
 }
 
 ### Update Books_Authors By ID
-PUT http://localhost:4000/api/books_authors/1/2 HTTP/1.1
+PUT http://localhost:4000/api/books_authors/3/1 HTTP/1.1
 content-type: application/json
 
 {
-    "book_id": 1,
-    "author_id": 3
+    "book_id": 3,
+    "author_id": 6
 }
 
 ### Delete Books_Authors By ID

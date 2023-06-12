@@ -54,12 +54,9 @@ function BooksAuthorsPage ({setBookAuthorToEdit}){
 
 
     const deleteBookAuthor = async (book_id, author_id) => {
-        console.log(`/api/books_authors/${book_id}/${author_id}`);
         const response = await fetch(`/api/books_authors/${book_id}/${author_id}`, {
             method: 'DELETE'
         });
-
-        console.log(`/api/books_authors/${book_id}/${author_id}`);
 
         if (!response.ok) {
             const json = await response.json();

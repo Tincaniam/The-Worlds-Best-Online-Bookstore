@@ -14,6 +14,8 @@ export const EditOrdersPage = ({orderToEdit}) => {
     const [discountCodes, setDiscountCodes] = useState([]);  // for dropdown
 
     // order states
+    const old_customer_id = orderToEdit.customer_id;
+
     const [customer_id, setCustomerId] = useState(orderToEdit.customer_id);
     const [order_date, setOrderDate] = useState(orderToEdit.order_date);
     const [order_total, setOrderTotal] = useState(orderToEdit.order_total);
@@ -29,6 +31,13 @@ export const EditOrdersPage = ({orderToEdit}) => {
 
     const editOrder = async () => {
         const editedOrder = { customer_id, order_date, order_total, discount_code_id };
+
+        // Remove empty discount_code_id
+        if (editedOrder.discount_code_id === '') {
+            delete editedOrder.discount_code_id;
+        }
+        
+        console.log("old_customer_id: " + old_customer_id);
         const response = await fetch(`/api/orders/${orderToEdit.order_id}`, {
             method: 'PUT',
             headers: {

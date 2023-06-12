@@ -95,7 +95,7 @@ class Order {
         });
     }
 
-    static updateByID(orderID, order, result) {
+    static updateQuery(orderID, order, result) {
         db.query(`UPDATE Orders SET customer_id = '${order.customer_id}', order_date = '${order.order_date}', order_total = '${order.order_total}', discount_code_id = '${order.discount_code_id}' WHERE order_id = ${orderID}`,
         (err, res) => {
             if (err) {
@@ -112,6 +112,29 @@ class Order {
                 result(null, { res });
             };
         });
+    }
+
+    static updateByID(orderID, order, result) {
+        db.query(disableForeignKeyChecks, (err, res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+                return;
+            }
+            else {
+                Order.updateQuery(orderID, order, result);
+                db.query(enableForeignKeyChecks, (err, res) => {
+                    if (err) {
+                        console.log("error: ", err);
+                        result(err, null);
+                        return;
+                    }
+                    else {
+                        console.log("Foreign Key Checks Enabled");
+                    };
+                });
+            };
+        }); 
     }
 
     static deleteByID(orderID, result) {

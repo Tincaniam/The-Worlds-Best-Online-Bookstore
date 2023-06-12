@@ -22,6 +22,7 @@ function BooksAuthorsTable({ book_authors, editBookAuthor, deleteBookAuthor }) {
             </thead>
             <tbody>
                 {book_authors.map((book_author, i) => <BookAuthor book_author={book_author}
+                    editBookAuthor={editBookAuthor}
                     deleteBookAuthor={deleteBookAuthor}
                     key={i} />)}
             </tbody>

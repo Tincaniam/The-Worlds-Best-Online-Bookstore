@@ -116,8 +116,8 @@ function () {
       });
     }
   }, {
-    key: "updateByID",
-    value: function updateByID(orderID, order, result) {
+    key: "updateQuery",
+    value: function updateQuery(orderID, order, result) {
       db.query("UPDATE Orders SET customer_id = '".concat(order.customer_id, "', order_date = '").concat(order.order_date, "', order_total = '").concat(order.order_total, "', discount_code_id = '").concat(order.discount_code_id, "' WHERE order_id = ").concat(orderID), function (err, res) {
         if (err) {
           console.log("error: ", err);
@@ -134,6 +134,32 @@ function () {
           });
           result(null, {
             res: res
+          });
+        }
+
+        ;
+      });
+    }
+  }, {
+    key: "updateByID",
+    value: function updateByID(orderID, order, result) {
+      db.query(disableForeignKeyChecks, function (err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+          return;
+        } else {
+          Order.updateQuery(orderID, order, result);
+          db.query(enableForeignKeyChecks, function (err, res) {
+            if (err) {
+              console.log("error: ", err);
+              result(err, null);
+              return;
+            } else {
+              console.log("Foreign Key Checks Enabled");
+            }
+
+            ;
           });
         }
 
