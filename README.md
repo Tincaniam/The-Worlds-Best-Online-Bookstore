@@ -26,7 +26,7 @@ Then run:
 
 `npm start`
 
-Citations
+
 
 Citations: 
 
