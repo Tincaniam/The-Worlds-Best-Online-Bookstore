@@ -1,8 +1,8 @@
-# CS340Group47
-
-World's Best Online Bookstore
+# World's Best Online Bookstore
 
 Is a full stack website with a Node Express server attached to a MySQL instance and a React front end.
+
+This project was an excellent exercise in good relational database design and CRUD web app development.
 
 By default, the server runs on port 4000 and the client runs on port 3000. You can run both simultaneously on your local machine for development by running the following commands on two different terminal instances.
 
